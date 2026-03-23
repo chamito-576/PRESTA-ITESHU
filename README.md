@@ -19,6 +19,6 @@ El objetivo del sistema es desarrollar una plataforma que permita gestionar pré
 - Estructura inicial del proyecto
 - Configuración del repositorio
 - Desarrollo inicial del sistema
-  Integración de la API
+- Integración de la API
 ## Autor
 Desarrollado por **Eduardo Guerrero Reséndiz**

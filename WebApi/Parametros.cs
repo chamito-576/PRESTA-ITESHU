@@ -10,14 +10,14 @@ namespace WebApi
                                                 Port=3036; 
                                                 User=root;
                                                 Password=2d0Serv3r2025; 
-                                                Database=Delegacion; 
+                                                Database=Delegacion; xxx
                                                 SslMode=None"
          */
 #if DEBUG
         public static string CadenaConexion = @"Server=CHAMITO\SQLEXPRESS;
                                         Database=PrestaITESHU;
                                         Trusted_Connection=True;
-                                        TrustServerCertificate=True;";
+                                        TrustServerCertificate=True;"; 
 #else
         public static string CadenaConexion = @"Server=db16351.databaseasp.net;
                                               Database=db16351;

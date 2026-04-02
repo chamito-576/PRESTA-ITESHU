@@ -20,5 +20,6 @@ El objetivo del sistema es desarrollar una plataforma que permita gestionar pré
 - Configuración del repositorio
 - Desarrollo inicial del sistema
 - Integración de la API
+- Subida de Base de Datos en .BAK
 ## Autor
 Desarrollado por **Eduardo Guerrero Reséndiz**

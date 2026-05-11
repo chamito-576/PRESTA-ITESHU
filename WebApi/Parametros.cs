@@ -10,19 +10,20 @@ namespace WebApi
                                                 Port=3036; 
                                                 User=root;
                                                 Password=2d0Serv3r2025; 
-                                                Database=Delegacion; xxx
+                                                Database=Delegacion; 
                                                 SslMode=None"
          */
 #if DEBUG
-        public static string CadenaConexion = @"Server=CHAMITO\SQLEXPRESS;
-                                        Database=PrestaITESHU;
-                                        Trusted_Connection=True;
-                                        TrustServerCertificate=True;"; 
+        public static string CadenaConexion = @"SERVER=AISLINN\MSSQLSERVER01; 
+                                                DATABASE=PrestaITESHU; 
+                                                Integrated Security=True;
+                                                TrustServerCertificate=True";
 #else
-        public static string CadenaConexion = @"Server=db16351.databaseasp.net;
-                                              Database=db16351;
-                                              User Id = db16351; 
-                                              Password=pQ!2@5Yw6q_A;Encrypt=False; 
+        public static string CadenaConexion = @"Server=db45166.databaseasp.net; 
+                                              Database=db45166; 
+                                              User Id=db45166; 
+                                              Password=2k?GJ8p_9+Am; 
+                                              Encrypt=False; 
                                               MultipleActiveResultSets=True;";
      
 #endif

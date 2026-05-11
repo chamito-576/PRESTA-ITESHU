@@ -12,10 +12,9 @@ namespace COMMON.Validadores
     {
         public CamposControlValidator() 
         {
-            RuleFor(c => c.FechaAlta).NotEmpty().GreaterThanOrEqualTo(new DateTime(2025, 1, 1));
-            RuleFor(c => c.UsuarioAlta).NotEmpty().MaximumLength(100);
+            RuleFor(c => c.FechaAlta).NotEmpty();
+            RuleFor(c => c.UsuarioAlta).MaximumLength(100);
             RuleFor(c => c.UsuarioMod).MaximumLength(100).When(c => !string.IsNullOrEmpty(c.UsuarioMod));
-            RuleFor(c => c.FechaMod).GreaterThanOrEqualTo(c => c.FechaAlta).When(c => c.FechaMod.HasValue);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using COMMON;
 using COMMON.Entidades;
 using FluentValidation;
+using Microsoft.Data.SqlClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -202,5 +203,7 @@ namespace BIZ
                 return null;
             }
         }
+
+        
     }
 }

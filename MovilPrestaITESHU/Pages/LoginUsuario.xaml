@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilPrestaITESHU.Pages.LoginUsuario">
+    <ScrollView>
+
+        <VerticalStackLayout Padding="30"
+                             Spacing="20"
+                             VerticalOptions="Center">
+            <Grid HeightRequest="30"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1000" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+                       Source="logoo.png"
+                       WidthRequest="900"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </Grid>
+
+            <Label Text="PRESTA “ITESHU”"
+                   FontSize="30"
+                   FontAttributes="Bold"
+                   TextColor="Green"
+                   HorizontalOptions="Center" />
+
+            <!-- SUBTITULO -->
+            <Label Text="INGRESA TUS DATOS:"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,0" />
+
+            <!-- CORREO -->
+            <Label Text="CORREO"
+                   FontSize="14"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <Frame WidthRequest="250"
+                   Padding="0"
+                   BackgroundColor="#E9E9E9"
+                   HasShadow="False"
+                   HorizontalOptions="Center">
+
+                <Entry Placeholder="nombre@gmail.com"
+                       Text="{Binding Correo}"
+                       BackgroundColor="Transparent"
+                       HorizontalTextAlignment="Center"
+                       TextColor="Black"
+                       HeightRequest="50" />
+            </Frame>
+
+            <!-- CONTRASEÑA -->
+            <Label Text="CONTRASEÑA"
+                   FontSize="14"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <Frame WidthRequest="250"
+                   CornerRadius="8"
+                   Padding="0"
+                   BackgroundColor="#E9E9E9"
+                   HasShadow="False"
+                   HorizontalOptions="Center">
+
+                <Grid WidthRequest="250"
+                      HorizontalOptions="Center">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="60" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- ENTRY -->
+                    <Frame Grid.Column="0"
+                           CornerRadius="8"
+                           Padding="0"
+                           BackgroundColor="#E9E9E9"
+                           HasShadow="False">
+
+                        <Entry Placeholder="••••••"
+                               Text="{Binding Contrasena}"
+                               IsPassword="{Binding OcultarContrasena}"
+                               BackgroundColor="Transparent"
+                               HorizontalTextAlignment="Center"
+                               TextColor="Black"
+                               HeightRequest="50" />
+
+                    </Frame>
+
+                    <!-- BOTON OJO -->
+                    <Button Grid.Column="1"
+                            Text="⊙"
+                            FontSize="20"
+                            Clicked="VerContrasena_Clicked"
+                            BackgroundColor="#E9E9E9"
+                            TextColor="Black"
+                            CornerRadius="8"
+                            HeightRequest="50" />
+
+                </Grid>
+            </Frame>
+
+            <!-- BOTON LOGIN -->
+            <Button Text="Iniciar sesión"
+                    Clicked="OnLoginClicked"
+                    WidthRequest="250"
+                    HeightRequest="50"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    CornerRadius="8"
+                    Margin="0,30,0,0"
+                    HorizontalOptions="Center" />
+
+            <Button Text="Crear Cuenta"
+                    Clicked="crearcuentaClicked"
+                    WidthRequest="250"
+                    HeightRequest="50"
+                    BackgroundColor="#B3B3B3"
+                    TextColor="Black"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    CornerRadius="8"
+                    Margin="0,30,0,0"
+                    HorizontalOptions="Center" />
+
+            <!-- BOTON SALIR -->
+            <Button Text="Salir"
+                    Clicked="cerrarsesionbutton_Clicked"
+                    WidthRequest="120"
+                    HeightRequest="45"
+                    BackgroundColor="Red"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HorizontalOptions="End"
+                    Margin="0,20,20,0" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -19,7 +19,7 @@ namespace COMMON.Validadores
             RuleFor(u => u.Contrasena).NotEmpty().MinimumLength(6);
             RuleFor(u => u.Rol).NotEmpty().MaximumLength(100);
             RuleFor(u => u.Activo).NotNull();
-            RuleFor(u => u.IdLaboratorio).NotEmpty();
+            
         }
     }
 }

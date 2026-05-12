@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PrestaITESHU.Pages.MenuAdmin">
+    <ScrollView>
+    <VerticalStackLayout Padding="20"
+                         Spacing="15">
+        <Grid HeightRequest="50"
+              HorizontalOptions="Center"
+              VerticalOptions="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1000" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0"
+                   Source="logoo.png"
+                   WidthRequest="900"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+        </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="400" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+                   Text="{Binding NombreAdmin,
+                   StringFormat='Nombre administrador: {0}'}"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Fill" />
+            <Label Grid.Column="0" Grid.Row="1"
+                   Text="{Binding RolAdmin,
+                   StringFormat='Rol: {0}'}"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Fill" />
+
+            <Label Grid.Column="1"
+                   Text="PRESTA ITESHU"
+                   FontSize="36"
+                   FontAttributes="Bold"
+                   TextColor="Green"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+
+            <Label Grid.Column="2"
+                   Text="{Binding FechaHoraActual}"
+                   FontSize="14"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
+        </Grid>
+
+        <HorizontalStackLayout Padding="20"
+                               Spacing="15"
+                               HorizontalOptions="Center">
+            <Button WidthRequest="150"
+                    x:Name="cerrarsesionbutton"
+                    Text="Cerrar Sesion"
+                    Clicked="cerrarsesionbutton_Clicked"
+                    BackgroundColor="Red"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="50" />
+            <Button WidthRequest="200"
+                    x:Name="ingresardatosbutton"
+                    Text="Editar Informacion"
+                    Clicked="ingresardatosbutton_Clicked"
+                    BackgroundColor="#0F1785"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="50" />
+        </HorizontalStackLayout>
+
+        <Frame IsVisible="{Binding MostrarFormulario}"
+               Padding="20"
+               BorderColor="LightGray"
+               CornerRadius="10">
+
+            <VerticalStackLayout Spacing="10">
+
+                <Label Text="Editar información"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="Green" />
+
+                    <Label Text="Nombre"
+                           FontAttributes="Bold" />
+                    <Entry Placeholder="Nombre"
+                       Text="{Binding Nombre}" />
+
+                    <Label Text="Apellido Paterno "
+                           FontAttributes="Bold" />
+                    <Entry Placeholder="Apellido Paterno"
+                       Text="{Binding ApellidoPaterno}" />
+
+                    <Label Text="Apellido Materno "
+                           FontAttributes="Bold" />
+                    <Entry Placeholder="Apellido Materno"
+                       Text="{Binding ApellidoMaterno}" />
+
+                    <Label Text="Correo "
+                           FontAttributes="Bold" />
+                    <Entry Placeholder="Correo"
+                       Text="{Binding Correo}" />
+
+                    <Label Text="Contraseña "
+                           FontAttributes="Bold" />
+                    <Entry Placeholder="Contraseña"
+                       Text="{Binding Contrasena}" />
+
+                    <Label Text="Matricula "
+                           FontAttributes="Bold" />
+                    <Entry Placeholder="Matricula"
+                       Text="{Binding Matricula}" />
+
+                    <Label Text="Carrera "
+                           FontAttributes="Bold" />
+                    <Entry Placeholder="Carrera"
+                       Text="{Binding Carrera}" />
+
+                    <Label Text="Semestre "
+                           FontAttributes="Bold" />
+                    <Entry Placeholder="Semestre"
+                       Text="{Binding Semestre}" />
+
+                <Button Text="Guardar"
+                        FontSize="14"
+                        Clicked="GuardarCambios_Clicked"
+                        BackgroundColor="#28A745"
+                        TextColor="White" />
+                <Button Text="Cancelar"
+                        FontSize="14"
+                        Clicked="Cancelar_Clicked"
+                        BackgroundColor="Red"
+                        TextColor="White" />
+
+            </VerticalStackLayout>
+
+        </Frame>
+
+        <Frame BorderColor="#0F1785"
+               CornerRadius="5"
+               Padding="15"
+               Margin="10">
+
+            <VerticalStackLayout Spacing="15">
+
+                <Grid BackgroundColor="#0F1785"
+                      Padding="10"
+                      Margin="-10,-10,-10,10"
+                      VerticalOptions="Center">
+
+                    <Label Text="Selecciona una opción:"
+                           FontAttributes="Bold"
+                           FontSize="16"
+                           TextColor="White"
+                           VerticalOptions="Center" />
+
+                </Grid>
+
+                <Grid ColumnSpacing="20"
+                      RowSpacing="20">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- FILA 1 -->
+
+                    <Button Grid.Row="0"
+                            Grid.Column="0"
+                            Text="Usuarios"
+                            x:Name="usuariosbutton"
+                            Clicked="usuariosbutton_Clicked"
+                            BackgroundColor="#48DB0F"
+                            TextColor="White"
+                            FontSize="26"
+                            FontAttributes="Bold"
+                            HeightRequest="200"
+                            WidthRequest="250" />
+
+                    <Button Grid.Row="0"
+                            Grid.Column="1"
+                            Text="Laboratorios"
+                            x:Name="laboratoriosbutton"
+                            Clicked="laboratoriosbutton_Clicked"
+                            BackgroundColor="#E52222"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            FontSize="26"
+                            HeightRequest="200"
+                            WidthRequest="250" />
+
+                    <Button Grid.Row="0"
+                            Grid.Column="2"
+                            Text="Inventario"
+                            x:Name="inventariobutton"
+                            Clicked="inventariobutton_Clicked"
+                            BackgroundColor="#10D2DE"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            FontSize="26"
+                            HeightRequest="200"
+                            WidthRequest="250" />
+
+                    <Button Grid.Row="0"
+                            Grid.Column="3"
+                            Text="Solicitudes"
+                            x:Name="solicitudesbutton"
+                            Clicked="solicitudesbutton_Clicked"
+                            BackgroundColor="#AC25FA"
+                            FontSize="26"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            HeightRequest="200"
+                            WidthRequest="250" />
+
+                    <Button Grid.Row="0"
+                            Grid.Column="4"
+                            Text="Préstamos y&#10;devoluciones"
+                            x:Name="prestamosdevolucionesbutton"
+                            Clicked="prestamosdevolucionesbutton_Clicked"
+                            FontSize="26"
+                            BackgroundColor="#FC3AD2"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            HeightRequest="200"
+                            WidthRequest="250" />
+
+                    <!-- FILA 2 -->
+
+                    <Button Grid.Row="1"
+                            Grid.Column="2"
+                            Text="Reportes"
+                            x:Name="reportesbutton"
+                            Clicked="reportesbutton_Clicked"
+                            FontSize="26"
+                            BackgroundColor="#FF7F29"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            HeightRequest="200"
+                            WidthRequest="250" />
+
+                </Grid>
+
+            </VerticalStackLayout>
+
+        </Frame>
+
+    </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

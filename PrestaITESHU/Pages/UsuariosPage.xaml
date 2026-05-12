@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PrestaITESHU.Pages.UsuariosPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20"
+                             Spacing="15">
+
+            <Grid HeightRequest="50"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1000" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+                       Source="logoo.png"
+                       WidthRequest="900"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+                <Button Grid.Column="1"
+                        WidthRequest="150"
+                        Text="Regresar"
+                        Clicked="Button_Clicked"
+                        BackgroundColor="Red"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HeightRequest="50" />
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="180" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                        Text="Agregar"
+                        Clicked="OnAgregarClicked"
+                        FontAttributes="Bold"
+                        BackgroundColor="#0F1785"
+                        TextColor="White"
+                        CornerRadius="10"
+                        HeightRequest="50" />
+                <Label Grid.Column="1"
+                       Text="Usuarios"
+                       FontSize="26"
+                       FontAttributes="Bold"
+                       TextColor="Green"
+                       HorizontalOptions="Center" />
+                <SearchBar Grid.Column="2"
+                           Placeholder="Buscar usuario..."
+                           TextChanged="SearchBar_TextChanged" />
+            </Grid>
+
+            <!-- FORMULARIO -->
+            <Frame BorderColor="LightGray"
+                   IsVisible="{Binding MostrarFormulario}"
+                   CornerRadius="10"
+                   Padding="15"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Ingresa los datos"
+                           FontSize="26"
+                           FontAttributes="Bold"
+                           TextColor="Green"
+                           HorizontalOptions="Center" />
+
+                    <Label Text="Nombre"
+                           FontAttributes="Bold" />
+                    <Entry Placeholder="Nombre"
+                           Text="{Binding Nombre}" />
+
+                    <Label Text="Apellido Paterno"
+                           FontAttributes="Bold" />
+                    <Entry Placeholder="Apellido Paterno"
+                           Text="{Binding ApellidoPaterno}" />
+
+                    <Label Text="Apellido Materno"
+                           FontAttributes="Bold" />
+                    <Entry Placeholder="Apellido Materno"
+                           Text="{Binding ApellidoMaterno}" />
+
+                    <Label Text="Correo"
+                           FontAttributes="Bold" />
+                    <Entry Placeholder="Correo"
+                           Text="{Binding Correo}" />
+
+                    <Label Text="Contraseña"
+                           FontAttributes="Bold" />
+                    <Entry Placeholder="Contraseña"
+                           Text="{Binding Contrasena}" />
+
+                    <Label Text="Matrícula"
+                           FontAttributes="Bold" />
+                    <Entry Placeholder="Matrícula"
+                           Text="{Binding Matricula}" />
+
+                    <Label Text="Carrera"
+                           FontAttributes="Bold" />
+                    <Entry Placeholder="Carrera"
+                           Text="{Binding Carrera}" />
+
+                    <Label Text="Semestre"
+                           FontAttributes="Bold" />
+                    <Entry Placeholder="Semestre"
+                           Text="{Binding Semestre}" />
+
+                    <Label Text="Rol"
+                           FontAttributes="Bold" />
+                    <Picker Title="Seleccionar rol"
+                            ItemsSource="{Binding RolesLista}"
+                            SelectedItem="{Binding RolSeleccionado}" />
+
+                    <Label Text="Laboratorio (opcional)"
+                           FontAttributes="Bold" />
+                    <Picker Title="Seleccionar laboratorio"
+                            ItemsSource="{Binding LaboratoriosLista}"
+                            ItemDisplayBinding="{Binding Nombre}"
+                            SelectedItem="{Binding LaboratorioSeleccionado}" />
+
+                    <HorizontalStackLayout>
+                        <Label Text="Activo"
+                               VerticalOptions="Center" />
+                        <Switch IsToggled="{Binding Activo}" />
+                    </HorizontalStackLayout>
+
+                    <Button Text="Guardar"
+                            Clicked="OnGuardarClicked"
+                            BackgroundColor="#28A745"
+                            FontAttributes="Bold"
+                            TextColor="White"
+                            CornerRadius="10"
+                            HeightRequest="50" />
+                    <Button Text="Cancelar"
+                            Clicked="OnCancelarClicked"
+                            BackgroundColor="Red"
+                            FontAttributes="Bold"
+                            TextColor="White"
+                            CornerRadius="10"
+                            HeightRequest="50" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- LISTA -->
+            <CollectionView ItemsSource="{Binding Usuarios}">
+                <CollectionView.Header>
+                    <Grid BackgroundColor="#D9D9D9"
+                          Padding="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="180" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="300" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0"
+                               Text="Nombre"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center" />
+                        <Label Grid.Column="1"
+                               Text="Matrícula"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center" />
+                        <Label Grid.Column="2"
+                               Text="Carrera"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center" />
+                        <Label Grid.Column="3"
+                               Text="Correo"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center" />
+                        <Label Grid.Column="4"
+                               Text="Rol"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center" />
+                        <Label Grid.Column="5"
+                               Text="Laboratorio"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center" />
+                        <Label Grid.Column="6"
+                               Text="Activo"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center" />
+                        <Label Grid.Column="7"
+                               Text="Acciones"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center" />
+                    </Grid>
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="Gray"
+                               Padding="5"
+                               Margin="0,0,0,2">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="180" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="120" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="220" />
+                                    <ColumnDefinition Width="200" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       FontSize="14"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Nombre}" />
+                                            <Span Text=" " />
+                                            <Span Text="{Binding ApellidoPaterno}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Label Grid.Column="1"
+                                       Text="{Binding Matricula}"
+                                       FontSize="14"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center" />
+                                <Label Grid.Column="2"
+                                       Text="{Binding Carrera}"
+                                       FontSize="14"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center" />
+                                <Label Grid.Column="3"
+                                       Text="{Binding Correo}"
+                                       FontSize="14"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center" />
+                                <Label Grid.Column="4"
+                                       Text="{Binding Rol}"
+                                       FontSize="14"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center" />
+                                <Label Grid.Column="5"
+                                       Text="{Binding NombreLaboratorio}"
+                                       FontSize="14"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center" />
+
+                                <Label Grid.Column="6"
+                                       FontSize="22"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding Activo}"
+                                                     Value="True">
+                                            <Setter Property="Text"
+                                                    Value="✔" />
+                                            <Setter Property="TextColor"
+                                                    Value="Green" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding Activo}"
+                                                     Value="False">
+                                            <Setter Property="Text"
+                                                    Value="✖" />
+                                            <Setter Property="TextColor"
+                                                    Value="Red" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+
+                                <HorizontalStackLayout Grid.Column="7"
+                                                       Spacing="10">
+                                    <Button WidthRequest="100"
+                                            Text="Editar"
+                                            Clicked="OnEditarClicked"
+                                            FontAttributes="Bold"
+                                            BackgroundColor="#FFC107"
+                                            TextColor="White" />
+                                    <Button WidthRequest="100"
+                                            Text="Eliminar"
+                                            Clicked="OnEliminarClicked"
+                                            FontAttributes="Bold"
+                                            BackgroundColor="#DC3545"
+                                            TextColor="White" />
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                               IsVisible="{Binding IsLoading}"
+                               Color="#0A84FF"
+                               HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

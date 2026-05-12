@@ -113,6 +113,118 @@ namespace DAL
             }
         }
 
+        public Usuarios LoginAdmin(string correo, string contrasena)
+        {
+            try
+            {
+                using (SqlConnection conexion =
+                    new SqlConnection(cadenaDeConexion))
+                {
+                    conexion.Open();
+
+                    SqlCommand cmd =
+                        new SqlCommand("Login_Administrador", conexion);
+
+                    cmd.CommandType =
+                        System.Data.CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@Correo", correo);
+
+                    cmd.Parameters.AddWithValue("@Contrasena", contrasena);
+
+                    SqlDataReader reader =
+                        cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        Usuarios usuario = new Usuarios
+                        {
+                            IdUsuario =
+                                Convert.ToInt32(reader["IdUsuario"]),
+
+                            Nombre =
+                                reader["Nombre"].ToString(),
+
+                            Correo =
+                                reader["Correo"].ToString(),
+
+                            Rol =
+                                reader["Rol"].ToString()
+                        };
+
+                        return usuario;
+                    }
+
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+                return null;
+            }
+        }
+
+        public Usuarios LoginUsuario(string correo,string contrasena)
+        {
+            try
+            {
+                using (SqlConnection conexion =
+                    new SqlConnection(cadenaDeConexion))
+                {
+                    conexion.Open();
+
+                    SqlCommand cmd =
+                        new SqlCommand(
+                            "Login_Usuario",
+                            conexion);
+
+                    cmd.CommandType =
+                        System.Data.CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue(
+                        "@Correo",
+                        correo);
+
+                    cmd.Parameters.AddWithValue(
+                        "@Contrasena",
+                        contrasena);
+
+                    SqlDataReader reader =
+                        cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        Usuarios usuario =
+                            new Usuarios
+                            {
+                                IdUsuario =
+                                    Convert.ToInt32(
+                                        reader["IdUsuario"]),
+
+                                Nombre =
+                                    reader["Nombre"].ToString(),
+
+                                Correo =
+                                    reader["Correo"].ToString(),
+
+                                Rol =
+                                    reader["Rol"].ToString()
+                            };
+
+                        return usuario;
+                    }
+
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+                return null;
+            }
+        }
+
         public bool Eliminar(T entidad)
         {
             Error = "";
@@ -256,6 +368,7 @@ namespace DAL
                 return null;
             }
         }
+
 
         private List<T> EjecutarConsulta(string sql, Dictionary<string, object> parametros)
         {

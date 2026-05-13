@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace COMMON.Modelos
 {
-    public class InventarioViewModel:Inventario
+    public class PrestamosQRViewModel:Prestamos
     {
-        public string NombreLaboratorio { get; set; }
-        public bool Seleccionado { get; set; }
+        public string Usuario { get; set; }
+        public string Material { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace COMMON
     {
         public static string UsuarioConectado = "UsuarioAPI";
         public static string RolUsuarioConectado { get; set; }
+        public static int? IdLaboratorioConectado;
         public static int IdUsuarioConectado { get; set; }
         //public static string UrlAPI = @"http://apiprestaiteshu.runasp.net/";
         public static string UrlAPI = @"https://localhost:7223/";

@@ -15,7 +15,7 @@ namespace COMMON.Validadores
             RuleFor(s => s.IdUsuario).NotEmpty();
             RuleFor(s => s.IdMaterial).NotEmpty();
             RuleFor(s => s.Estado).NotEmpty().Must(e => e == "Pendiente" || e == "Aprobado" || e == "Rechazado");
-            RuleFor(s => s.FechaSolicitud).LessThanOrEqualTo(DateTime.Now);
+            RuleFor(x => x.FechaSolicitud).NotEmpty();
         }
     }
 }

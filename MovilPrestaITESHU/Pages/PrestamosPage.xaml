@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.Maui.Controls"
+             x:Class="MovilPrestaITESHU.Pages.PrestamosPage">
+    <ScrollView>
+
+        <VerticalStackLayout Padding="20"
+                             Spacing="20">
+
+            <Grid HeightRequest="30"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1000" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+                       Source="logoo.png"
+                       WidthRequest="900"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </Grid>
+            
+            <Label Text="Mis préstamos"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="Green"/>
+
+            <CollectionView ItemsSource="{Binding Prestamos}">
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate>
+
+                        <Frame Padding="15"
+                               Margin="5"
+                               BorderColor="Gray">
+
+                            <VerticalStackLayout HorizontalOptions="Center"
+                                                 Spacing="10">
+
+                                <!-- QR -->
+                                <Grid>
+
+                                    <Grid.GestureRecognizers>
+
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+
+                                    </Grid.GestureRecognizers>
+
+                                    <zxing:BarcodeGeneratorView HeightRequest="220"
+                                                                WidthRequest="220"
+                                                                Format="QrCode"
+                                                                Value="{Binding CodigoQR}" />
+
+                                </Grid>
+
+                                <!-- FECHA -->
+                                <Label Text="{Binding FechaEntrega,
+                                    StringFormat='Fecha: {0:dd/MM/yyyy HH:mm}'}"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center" />
+
+                            </VerticalStackLayout>
+
+                        </Frame>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+            <Button Text="Regresar"
+                    Clicked="regresarbutton_Clicked"
+                    WidthRequest="120"
+                    HeightRequest="45"
+                    BackgroundColor="Red"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HorizontalOptions="End"
+                    Margin="0,20,20,0" />
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+</ContentPage>

@@ -2,6 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovilPrestaITESHU.Pages.MenuUsuario">
+    <ScrollView>
+        
+    
     <VerticalStackLayout Padding="20"
                              Spacing="15">
         <Grid HeightRequest="30"
@@ -17,12 +20,29 @@
                    VerticalOptions="Center" />
         </Grid>
 
-        <Label Text="Informacion"
-               FontSize="14"
+        <Label Grid.Column="0"
+               Text="{Binding Nombrecom,
+               StringFormat='Nombre: {0}'}"
+               FontSize="20"
                FontAttributes="Bold"
                TextColor="Black"
-               HorizontalOptions="Center"
-               VerticalOptions="Center" />
+               HorizontalOptions="Center" />
+            <Label Grid.Column="0"
+                   Grid.Row="1"
+                   Text="{Binding Carrera,
+                   StringFormat='Carrera: {0}'}"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Center" />
+            <Label Grid.Column="0"
+               Grid.Row="2"
+               Text="{Binding RolAdmin,
+               StringFormat='Rol: {0}'}"
+               FontSize="20"
+               FontAttributes="Bold"
+               TextColor="Black"
+               HorizontalOptions="Center" />
         <Button WidthRequest="120"
                 x:Name="ingresardatosbutton"
                 Text="Editar Informacion"
@@ -33,9 +53,75 @@
                 FontAttributes="Bold"
                 CornerRadius="10"
                 HeightRequest="40" />
-        
-        
-            <Frame BorderColor="#0F1785"
+
+        <Frame IsVisible="{Binding MostrarFormulario}"
+               Padding="20"
+               BorderColor="LightGray"
+               CornerRadius="10">
+
+            <VerticalStackLayout Spacing="10">
+
+                <Label Text="Editar información"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="Green" />
+
+                <Label Text="Nombre"
+                       FontAttributes="Bold" />
+                <Entry Placeholder="Nombre"
+                       Text="{Binding Nombre}" />
+
+                <Label Text="Apellido Paterno "
+                       FontAttributes="Bold" />
+                <Entry Placeholder="Apellido Paterno"
+                       Text="{Binding ApellidoPaterno}" />
+
+                <Label Text="Apellido Materno "
+                       FontAttributes="Bold" />
+                <Entry Placeholder="Apellido Materno"
+                       Text="{Binding ApellidoMaterno}" />
+
+                <Label Text="Correo "
+                       FontAttributes="Bold" />
+                <Entry Placeholder="Correo"
+                       Text="{Binding Correo}" />
+
+                <Label Text="Contraseña "
+                       FontAttributes="Bold" />
+                <Entry Placeholder="Contraseña"
+                       Text="{Binding Contrasena}" />
+
+                <Label Text="Matricula "
+                       FontAttributes="Bold" />
+                <Entry Placeholder="Matricula"
+                       Text="{Binding Matricula}" />
+
+                <Label Text="Carrera "
+                       FontAttributes="Bold" />
+                <Entry Placeholder="Carrera"
+                       Text="{Binding Carrera}" />
+
+                <Label Text="Semestre "
+                       FontAttributes="Bold" />
+                <Entry Placeholder="Semestre"
+                       Text="{Binding Semestre}" />
+
+                <Button Text="Guardar"
+                        FontSize="14"
+                        Clicked="GuardarCambios_Clicked"
+                        BackgroundColor="#28A745"
+                        TextColor="White" />
+                <Button Text="Cancelar"
+                        FontSize="14"
+                        Clicked="Cancelar_Clicked"
+                        BackgroundColor="Red"
+                        TextColor="White" />
+
+            </VerticalStackLayout>
+
+        </Frame>
+
+        <Frame BorderColor="#0F1785"
                    CornerRadius="5"
                    Padding="15"
                    Margin="10">
@@ -71,7 +157,7 @@
 
                         <Button Grid.Row="0"
                                 Grid.Column="0"
-                                Text="Buscar materias"
+                                Text="Buscar bienes"
                                 x:Name="buscarmaterial"
                                 Clicked="buscarmaterial_Clicked"
                                 BackgroundColor="#48DB0F"
@@ -109,4 +195,5 @@
                 HeightRequest="40" />
 
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

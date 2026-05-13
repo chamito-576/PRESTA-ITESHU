@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilPrestaITESHU.Pages.RegistroUsuario">
+    <ScrollView>
+
+        <VerticalStackLayout Padding="20"
+                             Spacing="12">
+            <Grid HeightRequest="30"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1000" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+                       Source="logoo.png"
+                       WidthRequest="900"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </Grid>
+
+            <Label Text="Crear cuenta"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="Green"
+                   HorizontalOptions="Center" />
+
+            <Label Text="Nombre"
+                   FontAttributes="Bold" />
+            <Entry Placeholder="Nombre"
+                   Text="{Binding Nombre}" />
+
+            <Label Text="Apellido paterno"
+                   FontAttributes="Bold" />
+            <Entry Placeholder="Apellido paterno"
+                   Text="{Binding ApellidoPaterno}" />
+
+            <Label Text="Apellido materno"
+                   FontAttributes="Bold" />
+            <Entry Placeholder="Apellido materno"
+                   Text="{Binding ApellidoMaterno}" />
+
+            <Label Text="Correo"
+                   FontAttributes="Bold" />
+            <Entry Placeholder="Correo"
+                   Keyboard="Email"
+                   Text="{Binding Correo}" />
+
+            <Label Text="Contraseña"
+                   FontAttributes="Bold" />
+            <Entry Placeholder="Contraseña"
+                   IsPassword="True"
+                   Text="{Binding Contrasena}" />
+
+            <Label Text="Matrícula"
+                   FontAttributes="Bold" />
+            <Entry Placeholder="Matrícula"
+                   Text="{Binding Matricula}" />
+
+            <Label Text="Carrera"
+                   FontAttributes="Bold" />
+            <Entry Placeholder="Carrera"
+                   Text="{Binding Carrera}" />
+
+            <Label Text="Semestre"
+                   FontAttributes="Bold" />
+            <Entry Placeholder="Semestre"
+                   Text="{Binding Semestre}" />
+
+            <Label Text="Rol"
+                   FontAttributes="Bold" />
+            <Picker Title="Seleccionar rol"
+                    ItemsSource="{Binding RolesLista}"
+                    SelectedItem="{Binding RolSeleccionado}" />
+
+            <Label Text="Laboratorio"
+                   FontAttributes="Bold" />
+
+            <Picker Title="Seleccionar laboratorio"
+                    ItemsSource="{Binding LaboratoriosLista}"
+                    ItemDisplayBinding="{Binding Nombre}"
+                    SelectedItem="{Binding LaboratorioSeleccionado}" />
+
+            <Button Text="Registrarse"
+                    Clicked="Registrarse_Clicked"
+                    BackgroundColor="#28A745"
+                    TextColor="White" />
+            <Button Text="Cancelar"
+                    Clicked="cancelar_Clicked"
+                    BackgroundColor="Red"
+                    TextColor="White" />
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+</ContentPage>

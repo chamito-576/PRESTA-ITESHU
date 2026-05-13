@@ -39,6 +39,8 @@ public partial class LoginUsuario : ContentPage
             {
                 Params.UsuarioConectado =
                     usuario.Nombre;
+                Params.IdUsuarioConectado = usuario.IdUsuario;
+                Params.RolUsuarioConectado = usuario.Rol;
 
                 await DisplayAlert(
                     "Correcto",
@@ -73,8 +75,9 @@ public partial class LoginUsuario : ContentPage
 
     }
 
-    private void crearcuentaClicked(object sender, EventArgs e)
+    private async void crearcuentaClicked(object sender, EventArgs e)
     {
-
+        await Navigation.PushAsync(
+        new RegistroUsuario());
     }
 }

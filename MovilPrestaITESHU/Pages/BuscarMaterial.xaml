@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilPrestaITESHU.Pages.BuscarMaterial">
+    <ScrollView>
+
+        <VerticalStackLayout Padding="30"
+                             Spacing="20">
+            <Grid HeightRequest="30"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1000" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+                       Source="logoo.png"
+                       WidthRequest="900"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </Grid>
+
+            <Picker Title="Seleccionar laboratorio"
+                    ItemsSource="{Binding Laboratorios}"
+                    ItemDisplayBinding="{Binding Nombre}"
+                    SelectedItem="{Binding LaboratorioSeleccionado}"
+                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
+            <CollectionView ItemsSource="{Binding Materiales}">
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate>
+
+                        <Frame BorderColor="Gray"
+                               Margin="5">
+
+                            <Grid ColumnDefinitions="50,*">
+
+                                <!-- CHECK -->
+                                <CheckBox IsChecked="{Binding Seleccionado}" />
+
+                                <!-- INFO -->
+                                <VerticalStackLayout Grid.Column="1">
+
+                                    <Label Text="{Binding Nombre}"
+                                           FontAttributes="Bold"
+                                           FontSize="14" />
+
+                                    <Label Text="{Binding Descripcion}"
+                                           FontSize="14" />
+
+                                    <Label Text="{Binding Cantidad,
+                                           StringFormat='Disponibles: {0}'}"
+                                           TextColor="Green"
+                                           FontSize="14" />
+
+                                </VerticalStackLayout>
+
+                            </Grid>
+
+                        </Frame>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+            <Button Text="Solicitar préstamo"
+                    Clicked="OnSolicitarClicked"
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    HeightRequest="50" />
+
+            <Button Text="Regresar"
+                    Clicked="regresar_Clicked"
+                    WidthRequest="120"
+                    HeightRequest="45"
+                    BackgroundColor="Red"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HorizontalOptions="End"
+                    Margin="0,20,20,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

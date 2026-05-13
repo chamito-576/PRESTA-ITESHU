@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL;
 
 namespace BIZ
 {
@@ -16,6 +17,7 @@ namespace BIZ
         protected HttpClient _httpClient;
         public string Error { get; protected set; }
         AbstractValidator<T> _validator;
+        protected DBSqlServer<T> db;
         protected GenericManager(AbstractValidator<T> validador)
         {
             _validator = validador;

@@ -1,10 +1,12 @@
 ﻿using COMMON;
 using COMMON.Entidades;
 using COMMON.Interfaces;
+using COMMON.Modelos;
 using FluentValidation;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,7 +47,7 @@ namespace DAL
                     Dictionary<string, object> parametros = new Dictionary<string, object>();
                     foreach (var propiedad in entidad.GetType().GetProperties().Where(p => p.Name != campoId))
                     {
-                        parametros.Add("@" + propiedad.Name, propiedad.GetValue(entidad));
+                        parametros.Add("@" + propiedad.Name, propiedad.GetValue(entidad) ?? DBNull.Value);
                     }
                     parametros.Add("@Id", entidad.GetType().GetProperty(campoId).GetValue(entidad));
                     if (EjecutarComando(sql, parametros) == 1)
@@ -225,6 +227,145 @@ namespace DAL
             }
         }
 
+        public List<SolicitudesViewModel> ObtenerSolicitudesAdmin(int idUsuario)
+        {
+            try
+            {
+                List<SolicitudesViewModel> lista =
+                    new List<SolicitudesViewModel>();
+
+                using (SqlConnection conexion =
+                    new SqlConnection(cadenaDeConexion))
+                {
+                    conexion.Open();
+
+                    SqlCommand cmd =
+                        new SqlCommand(
+                            "Page_Solicitudes",
+                            conexion);
+
+                    cmd.CommandType =
+                        CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue(
+                        "@Accion",
+                        1);
+
+                    cmd.Parameters.AddWithValue(
+                        "@IdUsuario",
+                        idUsuario);
+
+                    SqlDataReader reader =
+                        cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        lista.Add(new SolicitudesViewModel
+                        {
+                            IdSolicitud =
+                                Convert.ToInt32(
+                                    reader["IdSolicitud"]),
+
+                            NombreUsuario =
+                                reader["NombreUsuario"]
+                                .ToString(),
+
+                            NombreMaterial =
+                                reader["NombreMaterial"]
+                                .ToString(),
+
+                            Estado =
+                                reader["Estado"]
+                                .ToString(),
+
+                            FechaSolicitud =
+                                Convert.ToDateTime(
+                                    reader["FechaSolicitud"])
+                        });
+                    }
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+
+                return null;
+            }
+        }
+
+        public List<PrestamosQRViewModel> BuscarPrestamoQR(string codigoQR,int idLaboratorio)
+        {
+            try
+            {
+                Dictionary<string, string> parametros =
+                    new Dictionary<string, string>();
+
+                parametros.Add(
+                    "@CodigoQR",
+                    codigoQR);
+
+                parametros.Add(
+                    "@IdLaboratorio",
+                    idLaboratorio.ToString());
+
+                return EjecutaProcedimiento
+                    <PrestamosQRViewModel>(
+                    "Buscar_Prestamo_QR",
+                    parametros);
+            }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+
+                return null;
+            }
+        }
+        public bool CambiarEstadoSolicitud(int idSolicitud,string estado)
+        {
+            try
+            {
+                using (SqlConnection conexion =
+                    new SqlConnection(cadenaDeConexion))
+                {
+                    conexion.Open();
+
+                    SqlCommand cmd =
+                        new SqlCommand(
+                            "Page_Solicitudes",
+                            conexion);
+
+                    cmd.CommandType =
+                        CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue(
+                        "@Accion",
+                        2);
+
+                    cmd.Parameters.AddWithValue(
+                        "@IdSolicitud",
+                        idSolicitud);
+
+                    cmd.Parameters.AddWithValue(
+                        "@Estado",
+                        estado);
+
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+
+                return false;
+            }
+        }
+
+        
+
         public bool Eliminar(T entidad)
         {
             Error = "";
@@ -278,7 +419,7 @@ namespace DAL
 
                         foreach (var propiedad in entidad.GetType().GetProperties().Where(p => p.Name != campoId))
                         {
-                            parametros.Add("@" + propiedad.Name, propiedad.GetValue(entidad));
+                            parametros.Add("@" + propiedad.Name,propiedad.GetValue(entidad) ?? DBNull.Value);
                         }
                     }
                     else
@@ -287,7 +428,7 @@ namespace DAL
 
                         foreach (var propiedad in entidad.GetType().GetProperties())
                         {
-                            parametros.Add("@" + propiedad.Name, propiedad.GetValue(entidad));
+                            parametros.Add("@" + propiedad.Name,propiedad.GetValue(entidad) ?? DBNull.Value);
                         }
                     }
 

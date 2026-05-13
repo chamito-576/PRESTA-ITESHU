@@ -37,6 +37,7 @@ public partial class LoginAdmin : ContentPage
                     usuario.Nombre;
                 Params.IdUsuarioConectado = usuario.IdUsuario;
                 Params.RolUsuarioConectado = usuario.Rol;
+                Params.IdLaboratorioConectado = usuario.IdLaboratorio;
 
                 await DisplayAlert(
                     "Correcto",

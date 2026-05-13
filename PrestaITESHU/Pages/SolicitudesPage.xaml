@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PrestaITESHU.Pages.SolicitudesPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20"
+                             Spacing="15">
+
+            <Grid HeightRequest="50"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1000" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+                       Source="logoo.png"
+                       WidthRequest="900"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+                <Button Grid.Column="1"
+                        WidthRequest="150"
+                        Text="Regresar"
+                        Clicked="Button_Clicked"
+                        BackgroundColor="Red"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HeightRequest="50" />
+            </Grid>
+            <Label Grid.Column="1"
+                   Text="Solicitudes"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="Green"
+                   HorizontalOptions="Center" />
+
+            <CollectionView ItemsSource="{Binding Solicitudes}">
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate>
+
+                        <Frame BorderColor="Gray"
+                               Padding="15"
+                               Margin="5">
+
+                            <Grid ColumnDefinitions="*,140">
+
+                                <!-- DATOS -->
+                                <VerticalStackLayout>
+
+                                    <Label Text="{Binding NombreUsuario}"
+                                           FontAttributes="Bold"
+                                           FontSize="14" />
+
+                                    <Label Text="{Binding Matricula,
+                                        StringFormat='Matrícula: {0}'}" 
+                                           FontSize="14"/>
+
+                                    <Label Text="{Binding Carrera,
+                                        StringFormat='Carrera: {0}'}" 
+                                           FontSize="14"/>
+
+                                    <Label Text="{Binding Semestre,
+                                        StringFormat='Semestre: {0}'}" 
+                                           FontSize="14"/>
+
+                                    <Label Text="{Binding NombreMaterial,
+                                        StringFormat='Material: {0}'}"
+                                           FontSize="14" />
+
+                                    <Label Text="{Binding Estado,
+                                        StringFormat='Estado: {0}'}"
+                                           FontSize="14"/>
+
+                                </VerticalStackLayout>
+
+                                <!-- BOTONES -->
+                                <VerticalStackLayout Grid.Column="1"
+                                                     Spacing="10">
+
+                                    <Button Text="Aprobar"
+                                            BackgroundColor="Green"
+                                            TextColor="White"
+                                            Clicked="OnAprobarClicked" />
+
+                                    <Button Text="Rechazar"
+                                            BackgroundColor="Red"
+                                            TextColor="White"
+                                            Clicked="OnRechazarClicked" />
+
+                                </VerticalStackLayout>
+
+                            </Grid>
+
+                        </Frame>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

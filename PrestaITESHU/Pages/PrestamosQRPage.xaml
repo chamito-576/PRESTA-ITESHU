@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.Maui.Controls"
+             x:Class="PrestaITESHU.Pages.PrestamosQRPage">
+    <ScrollView>
+
+        <VerticalStackLayout Padding="20"
+                             Spacing="15">
+
+            <!-- ENCABEZADO -->
+
+            <Grid HeightRequest="50">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1000" />
+                    <ColumnDefinition Width="150" />
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0"
+                       Source="logoo.png"
+                       WidthRequest="900"
+                       HorizontalOptions="Center" />
+
+                <Button Grid.Column="1"
+                        Text="Regresar"
+                        Clicked="Regresar_Clicked"
+                        BackgroundColor="Red"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HeightRequest="50" />
+            </Grid>
+
+            <!-- TITULO -->
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"
+                        Text="Escanear QR"
+                        Clicked="EscanearQR_Clicked"
+                        BackgroundColor="#0F1785"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HeightRequest="55" />
+
+                <Label Grid.Column="1"
+                       Text="Prestamos y devoluciones"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       TextColor="Green"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+
+            </Grid>
+
+            <!-- CAMARA -->
+
+            <Frame BorderColor="Gray"
+                   Padding="10"
+                   IsVisible="{Binding MostrarCamara}">
+
+                <zxing:CameraBarcodeReaderView x:Name="cameraView"
+                                               HeightRequest="350"
+                                               BarcodesDetected="CameraView_BarcodesDetected" />
+            </Frame>
+
+            <!-- TABLA -->
+
+            <CollectionView ItemsSource="{Binding ListaPrestamos}">
+
+                <CollectionView.Header>
+
+                    <Grid BackgroundColor="#D9D9D9"
+                          Padding="8">
+
+                        <Grid.ColumnDefinitions>
+
+                            <ColumnDefinition Width="250" />
+                            <ColumnDefinition Width="250" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="250" />
+
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0"
+                               Text="Alumno/Docente"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center" />
+
+                        <Label Grid.Column="1"
+                               Text="Material"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center" />
+
+                        <Label Grid.Column="2"
+                               Text="Fecha préstamo"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center" />
+
+                        <Label Grid.Column="3"
+                               Text="Fecha devolución"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center" />
+
+                        <Label Grid.Column="4"
+                               Text="Estado"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center" />
+
+                        <Label Grid.Column="5"
+                               Text="Observaciones"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center" />
+
+                    </Grid>
+
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate>
+
+                        <Frame BorderColor="Gray"
+                               Padding="5"
+                               Margin="0,0,0,2">
+
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition Width="250" />
+                                    <ColumnDefinition Width="250" />
+                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="250" />
+
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       Text="{Binding Usuario}"
+                                       HorizontalOptions="Center" />
+
+                                <Label Grid.Column="1"
+                                       Text="{Binding Material}"
+                                       HorizontalOptions="Center" />
+
+                                <Label Grid.Column="2"
+                                       Text="{Binding FechaEntrega}"
+                                       HorizontalOptions="Center" />
+
+                                <Label Grid.Column="3"
+                                       Text="{Binding FechaDevolucion}"
+                                       HorizontalOptions="Center" />
+
+                                <Label Grid.Column="4"
+                                       Text="{Binding Estado}"
+                                       HorizontalOptions="Center" />
+
+                                <Label Grid.Column="5"
+                                       Text="{Binding Observaciones}"
+                                       HorizontalOptions="Center" />
+
+                            </Grid>
+
+                        </Frame>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+</ContentPage>

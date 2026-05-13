@@ -12,7 +12,7 @@ public partial class MenuAdmin : ContentPage
     private UsuariosManager usuariosManager;
 
     private Usuarios administradorActual;
-
+    public string Nombrecom { get; set; }
     public bool MostrarFormulario { get; set; }
 
     public string Nombre { get; set; }
@@ -51,6 +51,12 @@ public partial class MenuAdmin : ContentPage
         administradorActual =
             await usuariosManager.ObtenerPorId(
                 Params.IdUsuarioConectado);
+        Nombrecom =
+                $"{administradorActual.Nombre} " +
+                $"{administradorActual.ApellidoPaterno} " +
+                $"{administradorActual.ApellidoMaterno}";
+
+        OnPropertyChanged(nameof(Nombrecom));
 
         if (administradorActual != null)
         {
@@ -100,9 +106,9 @@ public partial class MenuAdmin : ContentPage
         await Navigation.PushAsync(new InventarioPage());
     }
 
-    private void solicitudesbutton_Clicked(object sender, EventArgs e)
+    private async void solicitudesbutton_Clicked(object sender, EventArgs e)
     {
-
+        await Navigation.PushAsync(new SolicitudesPage());
     }
 
     private void prestamosdevolucionesbutton_Clicked(object sender, EventArgs e)
@@ -153,6 +159,7 @@ public partial class MenuAdmin : ContentPage
                 usuariosManager.Error,
                 "OK");
         }
+        CargarAdministrador();
     }
 
     private void Cancelar_Clicked(object sender, EventArgs e)

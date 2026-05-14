@@ -151,7 +151,11 @@ namespace DAL
                                 reader["Correo"].ToString(),
 
                             Rol =
-                                reader["Rol"].ToString()
+                                reader["Rol"].ToString(),
+
+                            IdLaboratorio =Convert.ToInt32(reader["IdLaboratorio"])
+
+
                         };
 
                         return usuario;
@@ -299,20 +303,89 @@ namespace DAL
         {
             try
             {
+                using (SqlConnection conexion =
+                    new SqlConnection(cadenaDeConexion))
+                {
+                    conexion.Open();
+
+                    SqlCommand cmd =
+                        new SqlCommand(
+                            "Buscar_Prestamo_QR",
+                            conexion);
+
+                    cmd.CommandType =
+                        CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue(
+                        "@CodigoQR",
+                        codigoQR);
+
+                    cmd.Parameters.AddWithValue(
+                        "@IdLaboratorio",
+                        idLaboratorio);
+
+                    SqlDataReader reader =
+                        cmd.ExecuteReader();
+
+                    List<PrestamosQRViewModel> lista =
+                        new List<PrestamosQRViewModel>();
+
+                    while (reader.Read())
+                    {
+                        lista.Add(
+                            new PrestamosQRViewModel
+                            {
+                                IdPrestamo =
+                                    Convert.ToInt32(
+                                        reader["IdPrestamo"]),
+
+                                Usuario =
+                                    reader["Usuario"].ToString(),
+
+                                Material =
+                                    reader["Material"].ToString(),
+
+                                FechaEntrega =
+                                    reader["FechaEntrega"] == DBNull.Value
+                                    ? null
+                                    : Convert.ToDateTime(
+                                        reader["FechaEntrega"]),
+
+                                FechaDevolucion =
+                                    reader["FechaDevolucion"] == DBNull.Value
+                                    ? null
+                                    : Convert.ToDateTime(
+                                        reader["FechaDevolucion"]),
+
+                                Estado =
+                                    reader["Estado"].ToString(),
+
+                                Observaciones =
+                                    reader["Observaciones"].ToString()
+                            });
+                    }
+
+                    return lista;
+                }
+            }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+
+                return null;
+            }
+        }
+
+        public List<ReporteExcelViewModel> ObtenerReporteExcel()
+        {
+            try
+            {
                 Dictionary<string, string> parametros =
                     new Dictionary<string, string>();
 
-                parametros.Add(
-                    "@CodigoQR",
-                    codigoQR);
-
-                parametros.Add(
-                    "@IdLaboratorio",
-                    idLaboratorio.ToString());
-
                 return EjecutaProcedimiento
-                    <PrestamosQRViewModel>(
-                    "Buscar_Prestamo_QR",
+                    <ReporteExcelViewModel>(
+                    "Reporte_Excel_Prestamos",
                     parametros);
             }
             catch (Exception ex)

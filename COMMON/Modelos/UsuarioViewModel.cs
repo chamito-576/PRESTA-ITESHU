@@ -10,5 +10,6 @@ namespace COMMON.Modelos
     public class UsuarioViewModel:Usuarios
     {
         public string NombreLaboratorio { get; set; }
+        public int IdLaboratorio { get; set; }
     }
 }

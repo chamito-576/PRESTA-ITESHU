@@ -44,34 +44,29 @@ namespace BIZ
             }
         }
 
-        public async Task<List<PrestamosQRViewModel>>BuscarPorQR(string codigoQR,int idLaboratorio)
+        public async Task<List<PrestamosQRViewModel>>BuscarPrestamoQR(string codigoQR,int idLaboratorio)
         {
             try
             {
                 HttpResponseMessage response =
                     await _httpClient.GetAsync(
-                    $"api/Prestamos/BuscarQR?codigoQR={codigoQR}&idLaboratorio={idLaboratorio}");
+                        $"api/Prestamos/BuscarPrestamoQR/" +
+                        $"{codigoQR}/{idLaboratorio}");
 
                 var content =
-                    await response
-                    .Content
+                    await response.Content
                     .ReadAsStringAsync();
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Error = "";
-
                     return JsonConvert
-                        .DeserializeObject
-                        <List<PrestamosQRViewModel>>
-                        (content);
+                        .DeserializeObject<
+                            List<PrestamosQRViewModel>>(content);
                 }
-                else
-                {
-                    Error = content;
 
-                    return null;
-                }
+                Error = content;
+
+                return null;
             }
             catch (Exception ex)
             {

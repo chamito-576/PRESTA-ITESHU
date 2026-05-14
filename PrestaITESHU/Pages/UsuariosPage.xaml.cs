@@ -181,7 +181,7 @@ public partial class UsuariosPage : ContentPage
                     Carrera = Carrera,
                     Semestre = Semestre,
                     Rol = RolSeleccionado,
-                    IdLaboratorio = LaboratorioSeleccionado?.IdLaboratorio,
+                    IdLaboratorio = LaboratorioSeleccionado.IdLaboratorio,
                     Activo = Activo,
                     FechaAlta = DateTime.Now,
                     UsuarioAlta = Params.UsuarioConectado,
@@ -208,7 +208,7 @@ public partial class UsuariosPage : ContentPage
                 usuario.Carrera = Carrera;
                 usuario.Semestre = Semestre;
                 usuario.Rol = RolSeleccionado;
-                usuario.IdLaboratorio = LaboratorioSeleccionado?.IdLaboratorio;
+                usuario.IdLaboratorio = LaboratorioSeleccionado.IdLaboratorio;
                 usuario.Activo = Activo;
                 usuario.FechaMod = DateTime.Now;
                 usuario.UsuarioMod = Params.UsuarioConectado;

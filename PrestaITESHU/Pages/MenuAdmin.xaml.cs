@@ -111,14 +111,14 @@ public partial class MenuAdmin : ContentPage
         await Navigation.PushAsync(new SolicitudesPage());
     }
 
-    private void prestamosdevolucionesbutton_Clicked(object sender, EventArgs e)
+    private async void prestamosdevolucionesbutton_Clicked(object sender, EventArgs e)
     {
-
+        await Navigation.PushAsync(new PrestamosQRPage());
     }
 
-    private void reportesbutton_Clicked(object sender, EventArgs e)
+    private async void reportesbutton_Clicked(object sender, EventArgs e)
     {
-
+        await Navigation.PushAsync(new ReportesPage());
     }
 
     private async void GuardarCambios_Clicked(object sender, EventArgs e)

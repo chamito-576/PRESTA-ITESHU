@@ -10,7 +10,7 @@
 
             <!-- ENCABEZADO -->
 
-            <Grid HeightRequest="50">
+            <Grid HeightRequest="50" HorizontalOptions="Center">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1000" />
@@ -71,6 +71,67 @@
                                                BarcodesDetected="CameraView_BarcodesDetected" />
             </Frame>
 
+            <Frame BorderColor="Gray"
+                   Padding="15"
+                   IsVisible="{Binding MostrarFormulario}">
+
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text="Editar préstamo"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center" />
+
+                    <!-- ESTADO -->
+
+                    <Label Text="Estado" />
+
+                    <Picker SelectedItem="{Binding Estado}">
+
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Prestado</x:String>
+                                <x:String>Devuelto</x:String>
+                                <x:String>Retrasado</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+
+                    </Picker>
+
+                    <!-- FECHA -->
+
+                    <Label Text="Fecha devolución" />
+
+                    <DatePicker Date="{Binding FechaDevolucion}" />
+
+                    <!-- OBSERVACIONES -->
+
+                    <Label Text="Observaciones" />
+
+                    <Editor HeightRequest="120"
+                            Text="{Binding Observaciones}" />
+
+                    <!-- BOTONES -->
+
+                    <HorizontalStackLayout Spacing="10">
+
+                        <Button Text="Guardar"
+                                Clicked="GuardarCambios_Clicked"
+                                BackgroundColor="Green"
+                                TextColor="White"
+                                HorizontalOptions="FillAndExpand" />
+
+                        <Button Text="Cancelar"
+                                Clicked="Cancelar_Clicked"
+                                BackgroundColor="Red"
+                                TextColor="White"
+                                HorizontalOptions="FillAndExpand" />
+
+                    </HorizontalStackLayout>
+
+                </VerticalStackLayout>
+
+            </Frame>
             <!-- TABLA -->
 
             <CollectionView ItemsSource="{Binding ListaPrestamos}">
@@ -87,6 +148,7 @@
                             <ColumnDefinition Width="200" />
                             <ColumnDefinition Width="200" />
                             <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="250" />
                             <ColumnDefinition Width="250" />
 
                         </Grid.ColumnDefinitions>
@@ -120,6 +182,11 @@
                                Text="Observaciones"
                                FontAttributes="Bold"
                                HorizontalTextAlignment="Center" />
+                        
+                        <Label Grid.Column="6"
+                               Text="Acciones"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center" />
 
                     </Grid>
 
@@ -142,6 +209,7 @@
                                     <ColumnDefinition Width="200" />
                                     <ColumnDefinition Width="200" />
                                     <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="250" />
                                     <ColumnDefinition Width="250" />
 
                                 </Grid.ColumnDefinitions>
@@ -169,6 +237,26 @@
                                 <Label Grid.Column="5"
                                        Text="{Binding Observaciones}"
                                        HorizontalOptions="Center" />
+
+                                <HorizontalStackLayout Grid.Column="6"
+                                                       Spacing="10"
+                                                       HorizontalOptions="Center">
+
+                                    <Button Text="Editar"
+                                            Clicked="Editar_Clicked"
+                                            BackgroundColor="#FFC107"
+                                            TextColor="White"
+                                            FontAttributes="Bold"
+                                            WidthRequest="100" />
+
+                                    <Button Text="Eliminar"
+                                            Clicked="Eliminar_Clicked"
+                                            BackgroundColor="Red"
+                                            TextColor="White"
+                                            FontAttributes="Bold"
+                                            WidthRequest="100" />
+
+                                </HorizontalStackLayout>
 
                             </Grid>
 

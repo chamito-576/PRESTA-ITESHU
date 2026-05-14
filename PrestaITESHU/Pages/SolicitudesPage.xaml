@@ -54,18 +54,6 @@
                                            FontAttributes="Bold"
                                            FontSize="14" />
 
-                                    <Label Text="{Binding Matricula,
-                                        StringFormat='Matrícula: {0}'}" 
-                                           FontSize="14"/>
-
-                                    <Label Text="{Binding Carrera,
-                                        StringFormat='Carrera: {0}'}" 
-                                           FontSize="14"/>
-
-                                    <Label Text="{Binding Semestre,
-                                        StringFormat='Semestre: {0}'}" 
-                                           FontSize="14"/>
-
                                     <Label Text="{Binding NombreMaterial,
                                         StringFormat='Material: {0}'}"
                                            FontSize="14" />

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using ZXing.Net.Maui.Controls;
 
 namespace PrestaITESHU
 {
@@ -8,7 +9,7 @@ namespace PrestaITESHU
         {
             var builder = MauiApp.CreateBuilder();
             builder
-                .UseMauiApp<App>()
+                .UseMauiApp<App>().UseBarcodeReader()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

@@ -68,7 +68,7 @@ public partial class RegistroUsuario : ContentPage
 
                 Rol = RolSeleccionado,
 
-                IdLaboratorio = LaboratorioSeleccionado?.IdLaboratorio,
+                IdLaboratorio = LaboratorioSeleccionado.IdLaboratorio,
 
                 Activo = true,
 

@@ -49,8 +49,8 @@
 
                                     </Grid.GestureRecognizers>
 
-                                    <zxing:BarcodeGeneratorView HeightRequest="220"
-                                                                WidthRequest="220"
+                                    <zxing:BarcodeGeneratorView HeightRequest="50"
+                                                                WidthRequest="50"
                                                                 Format="QrCode"
                                                                 Value="{Binding CodigoQR}" />
 

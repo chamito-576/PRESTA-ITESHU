@@ -19,12 +19,12 @@ namespace WebApi
                                                 Integrated Security=True;
                                                 TrustServerCertificate=True";
 #else
-        public static string CadenaConexion = @"Server=db45166.databaseasp.net; 
-                                              Database=db45166; 
-                                              User Id=db45166; 
-                                              Password=2k?GJ8p_9+Am; 
-                                              Encrypt=False; 
-                                              MultipleActiveResultSets=True;";
+        public static string CadenaConexion = @"Server=db52140.databaseasp.net; 
+                                                Database=db52140; 
+                                                User Id=db52140; 
+                                                Password=P-y2+g6Ec3H=; 
+                                                Encrypt=False; 
+                                                MultipleActiveResultSets=True; ";
      
 #endif
 

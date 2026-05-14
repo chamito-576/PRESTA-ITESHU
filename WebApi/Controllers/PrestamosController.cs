@@ -13,20 +13,22 @@ namespace WebApi.Controllers
         public PrestamosController() : base(Parametros.FabricaRepository.PrestamosRepository())
         {
         }
-        [HttpGet("BuscarQR")]
-        public ActionResult BuscarQR(string codigoQR,int idLaboratorio)
+        [HttpGet]
+        [Route("BuscarPrestamoQR/{codigoQR}/{idLaboratorio}")]public ActionResult BuscarPrestamoQR(string codigoQR,int idLaboratorio)
         {
             try
             {
-                var resultado =
-                    Parametros
-                    .FabricaRepository
-                    .PrestamosRepository()
-                    .BuscarPrestamoQR(
+                var repo =
+                    (DBSqlServer<Prestamos>)
+                    Parametros.FabricaRepository
+                    .PrestamosRepository();
+
+                var lista =
+                    repo.BuscarPrestamoQR(
                         codigoQR,
                         idLaboratorio);
 
-                return Ok(resultado);
+                return Ok(lista);
             }
             catch (Exception ex)
             {

@@ -22,6 +22,7 @@ namespace WebApi
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+                
 
             app.UseHttpsRedirection();
 

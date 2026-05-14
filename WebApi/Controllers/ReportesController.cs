@@ -1,4 +1,5 @@
 ﻿using COMMON.Entidades;
+using DAL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,23 @@ namespace WebApi.Controllers
     {
         public ReportesController() : base(Parametros.FabricaRepository.ReportesRepository())
         {
+        }
+        [HttpGet("ObtenerReporteExcel")]
+        public ActionResult ObtenerReporteExcel()
+        {
+            try
+            {
+                var resultado =
+                    Parametros
+                    .FabricaRepository
+                    .PrestamosRepository();
+
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

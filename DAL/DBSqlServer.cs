@@ -299,7 +299,7 @@ namespace DAL
             }
         }
 
-        public List<PrestamosQRViewModel> BuscarPrestamoQR(string codigoQR,int idLaboratorio)
+        public List<PrestamosQRViewModel> BuscarPrestamoQR(int idPrestamo,int idLaboratorio)
         {
             try
             {
@@ -317,8 +317,8 @@ namespace DAL
                         CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue(
-                        "@CodigoQR",
-                        codigoQR);
+                        "@IdPrestamo",
+                            idPrestamo);
 
                     cmd.Parameters.AddWithValue(
                         "@IdLaboratorio",

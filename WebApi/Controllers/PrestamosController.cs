@@ -14,7 +14,8 @@ namespace WebApi.Controllers
         {
         }
         [HttpGet]
-        [Route("BuscarPrestamoQR/{codigoQR}/{idLaboratorio}")]public ActionResult BuscarPrestamoQR(string codigoQR,int idLaboratorio)
+        [Route("BuscarPrestamoQR/{idPrestamo}/{idLaboratorio}")]
+        public ActionResult BuscarPrestamoQR(int idPrestamo, int idLaboratorio)
         {
             try
             {
@@ -25,8 +26,8 @@ namespace WebApi.Controllers
 
                 var lista =
                     repo.BuscarPrestamoQR(
-                        codigoQR,
-                        idLaboratorio);
+                        idPrestamo,
+                         idLaboratorio);
 
                 return Ok(lista);
             }

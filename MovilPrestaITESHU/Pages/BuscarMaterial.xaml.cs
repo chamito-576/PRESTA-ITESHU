@@ -147,7 +147,7 @@ public partial class BuscarMaterial : ContentPage
 
                         IdMaterial = item.IdMaterial,
 
-                        FechaSolicitud = DateTime.Now,
+                        FechaSolicitud = (DateTime.Now).Date,
 
                         Estado = "Pendiente"
                     };

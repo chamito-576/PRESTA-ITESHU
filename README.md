@@ -27,15 +27,16 @@ El sistema cuenta con funcionalidades administrativas para la gestión de inform
 
 # Tecnologías utilizadas
 
-- ASP.NET
 - C#
+- .NET MAUI
+- ASP.NET
 - SQL Server
-- Entity Framework
+- XAML
 - HTML5
 - CSS3
 - JavaScript
-- Bootstrap
 - Swagger
+- API REST
 
 ---
 

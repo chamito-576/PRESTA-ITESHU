@@ -200,7 +200,7 @@
                                                FontAttributes="Bold"
                                                HorizontalOptions="Center"
                                                VerticalOptions="Center"
-                                               TextColor="Black" />
+                                               TextColor="White" />
 
                                         <Label Grid.Column="1"
                                                Text="{Binding Edificio}"
@@ -208,7 +208,7 @@
                                                FontAttributes="Bold"
                                                HorizontalOptions="Center"
                                                VerticalOptions="Center"
-                                               TextColor="Black" />
+                                               TextColor="White" />
 
                                         <Label Grid.Column="2"
                                                Text="{Binding Descripcion}"
@@ -216,7 +216,7 @@
                                                FontAttributes="Bold"
                                                HorizontalOptions="Center"
                                                VerticalOptions="Center"
-                                               TextColor="Black" />
+                                               TextColor="White" />
 
                                         <Label Grid.Column="3"
                                                Text="{Binding NombreAdministrador}"
@@ -224,7 +224,7 @@
                                                FontAttributes="Bold"
                                                HorizontalOptions="Center"
                                                VerticalOptions="Center"
-                                               TextColor="Black" />
+                                               TextColor="White" />
 
                                         <Label Grid.Column="4"
                                                FontSize="22"

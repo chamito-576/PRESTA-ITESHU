@@ -12,6 +12,7 @@ public partial class PrestamosQRPage : ContentPage
     private PrestamosManager prestamosManager;
     public bool MostrarFormulario { get; set; }
     public string CodigoQREscaneado { get; set; }
+    public int IdPrestamoEscaneado { get; set; }
 
     public PrestamosQRViewModel PrestamoSeleccionado { get; set; }
 
@@ -21,7 +22,7 @@ public partial class PrestamosQRPage : ContentPage
 
     public DateTime FechaDevolucion { get; set; } = DateTime.Now;
 
-    public ObservableCollection<PrestamosQRViewModel>ListaPrestamos{ get; set; } = new();
+    public ObservableCollection<PrestamosQRViewModel> ListaPrestamos { get; set; } = new();
 
     public bool MostrarCamara { get; set; }
     private bool procesandoQR = false;
@@ -31,17 +32,17 @@ public partial class PrestamosQRPage : ContentPage
 
         BindingContext = this;
 
-        prestamosManager =FabricManager.PrestamosManager;
+        prestamosManager = FabricManager.PrestamosManager;
     }
 
-    private void EscanearQR_Clicked(object sender,EventArgs e)
+    private void EscanearQR_Clicked(object sender, EventArgs e)
     {
         MostrarCamara = true;
         cameraView.IsDetecting = true;
         OnPropertyChanged(nameof(MostrarCamara));
     }
 
-    private async void CameraView_BarcodesDetected(object sender,BarcodeDetectionEventArgs e)
+    private async void CameraView_BarcodesDetected(object sender, BarcodeDetectionEventArgs e)
     {
         // EVITAR MULTIPLES LECTURAS
         if (procesandoQR)
@@ -69,12 +70,30 @@ public partial class PrestamosQRPage : ContentPage
                 OnPropertyChanged(nameof(MostrarCamara));
 
                 // BUSCAR PRESTAMO
+                var partes = codigo.Split('|');
+
+                var idTexto =
+                    partes[0].Replace("Prestamo:", "");
+
+                int idPrestamo =
+                    Convert.ToInt32(idTexto);
+              
+                IdPrestamoEscaneado = idPrestamo;
+
                 var lista =
                     await prestamosManager
                     .BuscarPrestamoQR(
-                        codigo,
+                        idPrestamo,
                         Params.IdLaboratorioConectado);
+                if (lista == null)
+                {
+                    await DisplayAlert(
+     "ERROR API",
+     $"Error:\n{prestamosManager.Error}",
+     "OK");
 
+                    return;
+                }
                 ListaPrestamos.Clear();
 
                 foreach (var item in lista)
@@ -108,15 +127,36 @@ public partial class PrestamosQRPage : ContentPage
     {
         try
         {
+            if (PrestamoSeleccionado == null)
+            {
+                await DisplayAlert(
+                    "Error",
+                    "No hay préstamo seleccionado",
+                    "OK");
+
+                return;
+            }
+
             Prestamos prestamo =
                 await prestamosManager.ObtenerPorId(
                     PrestamoSeleccionado.IdPrestamo);
+
+            if (prestamo == null)
+            {
+                await DisplayAlert(
+                    "Error",
+                    prestamosManager.Error,
+                    "OK");
+
+                return;
+            }
 
             prestamo.Estado = Estado;
 
             prestamo.Observaciones = Observaciones;
 
-            prestamo.FechaDevolucion = FechaDevolucion;
+            prestamo.FechaDevolucion =
+    FechaDevolucion.Date + DateTime.Now.TimeOfDay;
 
             var resultado =
                 await prestamosManager.Modificar(prestamo);
@@ -129,8 +169,17 @@ public partial class PrestamosQRPage : ContentPage
                     "OK");
 
                 MostrarFormulario = false;
+
                 await RecargarPrestamos();
+
                 OnPropertyChanged(nameof(MostrarFormulario));
+            }
+            else
+            {
+                await DisplayAlert(
+                    "Error",
+                    prestamosManager.Error,
+                    "OK");
             }
         }
         catch (Exception ex)
@@ -162,7 +211,7 @@ public partial class PrestamosQRPage : ContentPage
         Observaciones = prestamo.Observaciones;
 
         FechaDevolucion =
-            prestamo.FechaDevolucion ?? DateTime.Now;
+    prestamo.FechaDevolucion ?? DateTime.Now;
 
         MostrarFormulario = true;
 
@@ -175,10 +224,7 @@ public partial class PrestamosQRPage : ContentPage
     {
         try
         {
-            var lista =
-                await prestamosManager.BuscarPrestamoQR(
-                    CodigoQREscaneado,
-                    Params.IdLaboratorioConectado);
+            var lista = await prestamosManager.BuscarPrestamoQR(IdPrestamoEscaneado, Params.IdLaboratorioConectado);
 
             ListaPrestamos.Clear();
 

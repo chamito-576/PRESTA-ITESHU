@@ -77,22 +77,39 @@ public partial class SolicitudesPage : ContentPage
                 Prestamos prestamo = new Prestamos
                 {
                     IdSolicitud = solicitud.IdSolicitud,
-                    FechaEntrega = DateTime.Now,
+                    FechaEntrega = (DateTime.Now).Date,
                     FechaDevolucion = null,
-                    Estado ="Aprobado",
-                    CodigoQR = $"Prestamo:{solicitud.IdSolicitud}" +
-                    $"|Usuario:{solicitud.NombreUsuario}" +
-                    $"|Fecha:{DateTime.Now}",
+                    Estado = "Aprobado",
+                    CodigoQR = "TEMP",
                     Observaciones = ""
                 };
-                await DisplayAlert("DEBUG",
-                    $"Solicitud: {prestamo.IdSolicitud}\n" +
-                    $"Estado: {prestamo.Estado}\n" +
-                    $"QR: {prestamo.CodigoQR}",
-                    "OK");
+
                 var prestamoGuardado =
-                    await prestamosManager
-                    .Agregar(prestamo);
+                    await prestamosManager.Agregar(prestamo);
+
+                if (prestamoGuardado != null)
+                {
+                    prestamoGuardado.CodigoQR =
+                        $"Prestamo:{prestamoGuardado.IdPrestamo}" +
+                        $"|Usuario:{solicitud.NombreUsuario}" +
+                        $"|Fecha:{(DateTime.Now).Date}";
+
+                    await prestamosManager.Modificar(prestamoGuardado);
+
+                    Solicitudes.Remove(solicitud);
+
+                    await DisplayAlert(
+                        "Correcto",
+                        "Solicitud aprobada",
+                        "OK");
+                }
+                else
+                {
+                    await DisplayAlert(
+                        "Error",
+                        prestamosManager.Error,
+                        "OK");
+                }
 
                 if (prestamoGuardado != null)
                 {

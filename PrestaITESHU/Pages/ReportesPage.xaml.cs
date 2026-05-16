@@ -100,7 +100,7 @@ public partial class ReportesPage : ContentPage
                 using var stream =
                     await FileSystem
                     .OpenAppPackageFileAsync(
-                        "PlantillaReporte.xlsx");
+                        "FormatoReporte.xlsx");
 
                 string ruta =
                     Path.Combine(
@@ -126,10 +126,16 @@ public partial class ReportesPage : ContentPage
                         laboratorio.Nombre;
 
                     hoja.Cell("BE7").Value =
-                        prestamo?.FechaEntrega;
+     prestamo?.FechaEntrega;
+
+                    hoja.Cell("BE7").Style.DateFormat.Format =
+                        "dd/MM/yyyy";
 
                     hoja.Cell("BE9").Value =
                         prestamo?.FechaDevolucion;
+
+                    hoja.Cell("BE9").Style.DateFormat.Format =
+                        "dd/MM/yyyy";
 
                     hoja.Cell("V12").Value =
                         laboratorio.Nombre;

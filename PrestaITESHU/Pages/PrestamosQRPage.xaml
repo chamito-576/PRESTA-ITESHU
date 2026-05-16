@@ -242,19 +242,19 @@
                                                        Spacing="10"
                                                        HorizontalOptions="Center">
 
-                                    <Button Text="Editar"
+                                    <Button Text="Edit"
                                             Clicked="Editar_Clicked"
                                             BackgroundColor="#FFC107"
                                             TextColor="White"
                                             FontAttributes="Bold"
-                                            WidthRequest="100" />
+                                            WidthRequest="65" />
 
-                                    <Button Text="Eliminar"
+                                    <Button Text="Elim"
                                             Clicked="Eliminar_Clicked"
                                             BackgroundColor="Red"
                                             TextColor="White"
                                             FontAttributes="Bold"
-                                            WidthRequest="100" />
+                                            WidthRequest="65" />
 
                                 </HorizontalStackLayout>
 

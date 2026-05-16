@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Ugd4kqL+EDw=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\salva\\source\\repos\\PrestaITESHU-AgregarEntidades\\COMMON\\COMMON.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\salva\\.nuget\\packages\\fluentvalidation\\12.1.1\\fluentvalidation.12.1.1.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -12,7 +12,7 @@ namespace COMMON
         public static string RolUsuarioConectado { get; set; }
         public static int IdLaboratorioConectado { get; set; }
         public static int IdUsuarioConectado { get; set; }
-        //public static string UrlAPI = @"http://apipresta.runasp.net/";
-        public static string UrlAPI = @"https://localhost:7223/";
+        public static string UrlAPI = @"http://apipresta.runasp.net/";
+        //public static string UrlAPI = @"https://localhost:7223/";
     }
 }

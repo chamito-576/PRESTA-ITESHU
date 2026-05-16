@@ -1,0 +1,12 @@
+C:\Users\salva\source\repos\PrestaITESHU-AgregarEntidades\COMMON\bin\Release\net8.0\COMMON.deps.json
+C:\Users\salva\source\repos\PrestaITESHU-AgregarEntidades\COMMON\bin\Release\net8.0\COMMON.dll
+C:\Users\salva\source\repos\PrestaITESHU-AgregarEntidades\COMMON\bin\Release\net8.0\COMMON.pdb
+C:\Users\salva\source\repos\PrestaITESHU-AgregarEntidades\COMMON\obj\Release\net8.0\COMMON.csproj.AssemblyReference.cache
+C:\Users\salva\source\repos\PrestaITESHU-AgregarEntidades\COMMON\obj\Release\net8.0\COMMON.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\salva\source\repos\PrestaITESHU-AgregarEntidades\COMMON\obj\Release\net8.0\COMMON.AssemblyInfoInputs.cache
+C:\Users\salva\source\repos\PrestaITESHU-AgregarEntidades\COMMON\obj\Release\net8.0\COMMON.AssemblyInfo.cs
+C:\Users\salva\source\repos\PrestaITESHU-AgregarEntidades\COMMON\obj\Release\net8.0\COMMON.csproj.CoreCompileInputs.cache
+C:\Users\salva\source\repos\PrestaITESHU-AgregarEntidades\COMMON\obj\Release\net8.0\COMMON.dll
+C:\Users\salva\source\repos\PrestaITESHU-AgregarEntidades\COMMON\obj\Release\net8.0\refint\COMMON.dll
+C:\Users\salva\source\repos\PrestaITESHU-AgregarEntidades\COMMON\obj\Release\net8.0\COMMON.pdb
+C:\Users\salva\source\repos\PrestaITESHU-AgregarEntidades\COMMON\obj\Release\net8.0\ref\COMMON.dll

@@ -15,7 +15,7 @@ El sistema cuenta con funcionalidades administrativas para la gestión de inform
 # Características principales
 
 - Gestión de usuarios
-- Inicio de sesión y autenticación
+- Inicio de sesión 
 - Panel administrativo
 - Gestión de préstamos
 - Integración con API REST

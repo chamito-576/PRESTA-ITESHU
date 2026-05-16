@@ -44,14 +44,14 @@ namespace BIZ
             }
         }
 
-        public async Task<List<PrestamosQRViewModel>>BuscarPrestamoQR(string codigoQR,int idLaboratorio)
+        public async Task<List<PrestamosQRViewModel>>BuscarPrestamoQR(int idPrestamo, int idLaboratorio)
         {
             try
             {
                 HttpResponseMessage response =
                     await _httpClient.GetAsync(
                         $"api/Prestamos/BuscarPrestamoQR/" +
-                        $"{codigoQR}/{idLaboratorio}");
+                        $"{idPrestamo}/{idLaboratorio}");
 
                 var content =
                     await response.Content

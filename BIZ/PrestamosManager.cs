@@ -75,5 +75,58 @@ namespace BIZ
                 return null;
             }
         }
+
+        public async Task<List<HistorialPrestamoViewModel>>ObtenerHistorialUsuario(int idUsuario)
+        {
+            try
+            {
+                HttpResponseMessage response =
+                    await _httpClient.GetAsync(
+                        $"api/Prestamos/" +
+                        $"ObtenerHistorialUsuario/" +
+                        $"{idUsuario}");
+
+                var content =await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<List<HistorialPrestamoViewModel>>(content);
+                }
+                Error = content;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+                return null;
+            }
+        }
+        public async Task<ReportePrestamoViewModel> ObtenerReportePrestamo(int idPrestamo)
+        {
+            try
+            {
+                HttpResponseMessage response =
+                    await _httpClient.GetAsync(
+                        $"api/Prestamos/ObtenerReportePrestamo/{idPrestamo}");
+
+                var content =
+                    await response.Content
+                    .ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject
+                        <ReportePrestamoViewModel>(content);
+                }
+
+                Error = content;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+                return null;
+            }
+        }
     }
 }

@@ -147,6 +147,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
@@ -172,13 +173,25 @@
                             Text="Mis prestamos"
                             x:Name="misprestamos"
                             Clicked="misprestamos_Clicked"
-                            BackgroundColor="#E52222"
+                            BackgroundColor="#F68F0A"
                             TextColor="White"
                             FontAttributes="Bold"
                             FontSize="24"
                             HeightRequest="100"
                             WidthRequest="800" />
-                </Grid>
+
+                        <Button Grid.Row="2"
+                                Grid.Column="0"
+                                Text="Historial"
+                                x:Name="historial"
+                                Clicked="historial_Clicked"
+                                BackgroundColor="#FC3AD2"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                FontSize="24"
+                                HeightRequest="100"
+                                WidthRequest="800" />
+                    </Grid>
 
                 </VerticalStackLayout>
 

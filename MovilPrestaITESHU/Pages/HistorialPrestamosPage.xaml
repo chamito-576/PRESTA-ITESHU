@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovilPrestaITESHU.Pages.HistorialPrestamosPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="30"
+                             Spacing="20">
+            <Grid HeightRequest="30"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1000" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+                       Source="logoo.png"
+                       WidthRequest="900"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </Grid>
+
+            <CollectionView ItemsSource="{Binding Historial}">
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate>
+
+                        <Frame Margin="5"
+                               BorderColor="LightGray"
+                               CornerRadius="10">
+
+                            <VerticalStackLayout Spacing="5">
+
+                                <Label Text="{Binding Material}"
+                                       FontSize="20"
+                                       FontAttributes="Bold" />
+
+                                <Label Text="{Binding Laboratorio}" />
+
+                                <Label Text="{Binding FechaEntrega,
+                                    StringFormat='Fecha: {0:dd/MM/yyyy}'}" />
+
+                                <Label Text="{Binding Estado}"
+                                       FontAttributes="Bold">
+
+                                    <Label.Triggers>
+
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding Estado}"
+                                                     Value="Pendiente">
+
+                                            <Setter Property="TextColor"
+                                                    Value="Red" />
+
+                                        </DataTrigger>
+
+                                        <DataTrigger TargetType="Label"
+                                                     Binding="{Binding Estado}"
+                                                     Value="Entregado">
+
+                                            <Setter Property="TextColor"
+                                                    Value="Green" />
+
+                                        </DataTrigger>
+
+                                    </Label.Triggers>
+
+                                </Label>
+
+                            </VerticalStackLayout>
+
+                        </Frame>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+
+            <Button Text="Regresar"
+                    Clicked="regresar_Clicked"
+                    WidthRequest="120"
+                    HeightRequest="45"
+                    BackgroundColor="Red"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HorizontalOptions="End"
+                    Margin="0,20,20,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

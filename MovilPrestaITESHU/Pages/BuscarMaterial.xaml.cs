@@ -147,11 +147,10 @@ public partial class BuscarMaterial : ContentPage
 
                         IdMaterial = item.IdMaterial,
 
-                        FechaSolicitud = (DateTime.Now).Date,
+                        FechaSolicitud = DateTime.Now,
 
                         Estado = "Pendiente"
                     };
-                await solicitudesManager.Agregar(solicitud);
 
                 var resultado =
                     await solicitudesManager.Agregar(solicitud);

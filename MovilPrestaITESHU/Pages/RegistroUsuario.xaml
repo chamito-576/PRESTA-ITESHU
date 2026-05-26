@@ -73,14 +73,6 @@
                     ItemsSource="{Binding RolesLista}"
                     SelectedItem="{Binding RolSeleccionado}" />
 
-            <Label Text="Laboratorio"
-                   FontAttributes="Bold" />
-
-            <Picker Title="Seleccionar laboratorio"
-                    ItemsSource="{Binding LaboratoriosLista}"
-                    ItemDisplayBinding="{Binding Nombre}"
-                    SelectedItem="{Binding LaboratorioSeleccionado}" />
-
             <Button Text="Registrarse"
                     Clicked="Registrarse_Clicked"
                     BackgroundColor="#28A745"

@@ -68,8 +68,6 @@ public partial class RegistroUsuario : ContentPage
 
                 Rol = RolSeleccionado,
 
-                IdLaboratorio = LaboratorioSeleccionado.IdLaboratorio,
-
                 Activo = true,
 
                 FechaAlta = DateTime.Now,

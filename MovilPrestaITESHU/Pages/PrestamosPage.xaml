@@ -56,9 +56,14 @@
 
                                 </Grid>
 
+                                <Label Text="{Binding NombreMaterial}"
+                                       FontAttributes="Bold"
+                                       FontSize="18"
+                                       TextColor="Black"
+                                       HorizontalOptions="Center" />
                                 <!-- FECHA -->
                                 <Label Text="{Binding FechaEntrega,
-                                    StringFormat='Fecha: {0:dd/MM/yyyy HH:mm}'}"
+                                    StringFormat='Fecha: {0:dd/MM/yyyy}'}"
                                        FontAttributes="Bold"
                                        HorizontalOptions="Center" />
 

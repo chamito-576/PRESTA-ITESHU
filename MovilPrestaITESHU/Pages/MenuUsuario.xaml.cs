@@ -133,4 +133,9 @@ public partial class MenuUsuario : ContentPage
                 "OK");
         }
     }
+
+    private async void historial_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new HistorialPrestamosPage());
+    }
 }

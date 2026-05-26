@@ -6,20 +6,15 @@
     <ScrollView>
 
         <VerticalStackLayout Padding="20"
-                             Spacing="15">
+                             Spacing="20">
 
             <!-- ENCABEZADO -->
 
-            <Grid HeightRequest="50" HorizontalOptions="Center">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1000" />
-                    <ColumnDefinition Width="150" />
-                </Grid.ColumnDefinitions>
+            <Grid ColumnDefinitions="*,Auto">
 
                 <Image Grid.Column="0"
                        Source="logoo.png"
-                       WidthRequest="900"
+                       HeightRequest="70"
                        HorizontalOptions="Center" />
 
                 <Button Grid.Column="1"
@@ -29,62 +24,84 @@
                         TextColor="White"
                         FontAttributes="Bold"
                         CornerRadius="10"
-                        HeightRequest="50" />
+                        HeightRequest="45"
+                        WidthRequest="120" />
+
             </Grid>
 
             <!-- TITULO -->
 
-            <Grid>
+            <Frame BackgroundColor="White"
+                   CornerRadius="15"
+                   Padding="15"
+                   HasShadow="True">
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                <Grid ColumnDefinitions="220,*">
 
-                <Button Grid.Column="0"
-                        Text="Escanear QR"
-                        Clicked="EscanearQR_Clicked"
-                        BackgroundColor="#0F1785"
-                        TextColor="White"
-                        FontAttributes="Bold"
-                        CornerRadius="10"
-                        HeightRequest="55" />
+                    <Button Grid.Column="0"
+                            Text="Escanear QR"
+                            Clicked="EscanearQR_Clicked"
+                            BackgroundColor="#0F1785"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            HeightRequest="55"
+                            CornerRadius="12" />
 
-                <Label Grid.Column="1"
-                       Text="Prestamos y devoluciones"
-                       FontSize="28"
-                       FontAttributes="Bold"
-                       TextColor="Green"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center" />
+                    <Label Grid.Column="1"
+                           Text="Préstamos y devoluciones"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           TextColor="#198754"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
 
-            </Grid>
+                </Grid>
+
+            </Frame>
 
             <!-- CAMARA -->
 
-            <Frame BorderColor="Gray"
-                   Padding="10"
-                   IsVisible="{Binding MostrarCamara}">
+            <Frame IsVisible="{Binding MostrarCamara}"
+                   BorderColor="#D0D0D0"
+                   BackgroundColor="White"
+                   CornerRadius="15"
+                   Padding="10">
 
-                <zxing:CameraBarcodeReaderView x:Name="cameraView"
-                                               HeightRequest="350"
-                                               BarcodesDetected="CameraView_BarcodesDetected" />
+                <VerticalStackLayout Spacing="10">
+
+                    <Label Text="Escanea el código QR"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           FontSize="18" />
+
+                    <zxing:CameraBarcodeReaderView x:Name="cameraView"
+                                                   HeightRequest="350"
+                                                   BarcodesDetected="CameraView_BarcodesDetected" />
+
+                </VerticalStackLayout>
+
             </Frame>
 
-            <Frame BorderColor="Gray"
-                   Padding="15"
-                   IsVisible="{Binding MostrarFormulario}">
+            <!-- FORMULARIO -->
+
+            <Frame IsVisible="{Binding MostrarFormulario}"
+                   BorderColor="#D0D0D0"
+                   BackgroundColor="Black"
+                   CornerRadius="15"
+                   Padding="20">
 
                 <VerticalStackLayout Spacing="15">
 
                     <Label Text="Editar préstamo"
-                           FontSize="22"
+                           FontSize="24"
                            FontAttributes="Bold"
                            HorizontalOptions="Center" />
 
                     <!-- ESTADO -->
 
-                    <Label Text="Estado" />
+                    <Label Text="Estado"
+                           FontAttributes="Bold" />
 
                     <Picker SelectedItem="{Binding Estado}">
 
@@ -100,31 +117,36 @@
 
                     <!-- FECHA -->
 
-                    <Label Text="Fecha devolución" />
+                    <Label Text="Fecha devolución"
+                           FontAttributes="Bold" />
 
                     <DatePicker Date="{Binding FechaDevolucion}" />
 
                     <!-- OBSERVACIONES -->
 
-                    <Label Text="Observaciones" />
+                    <Label Text="Observaciones"
+                           FontAttributes="Bold" />
 
-                    <Editor HeightRequest="120"
-                            Text="{Binding Observaciones}" />
+                    <Editor Text="{Binding Observaciones}"
+                            HeightRequest="120"
+                            AutoSize="TextChanges" />
 
                     <!-- BOTONES -->
 
-                    <HorizontalStackLayout Spacing="10">
+                    <HorizontalStackLayout Spacing="15">
 
                         <Button Text="Guardar"
                                 Clicked="GuardarCambios_Clicked"
-                                BackgroundColor="Green"
+                                BackgroundColor="#198754"
                                 TextColor="White"
+                                FontAttributes="Bold"
                                 HorizontalOptions="FillAndExpand" />
 
                         <Button Text="Cancelar"
                                 Clicked="Cancelar_Clicked"
-                                BackgroundColor="Red"
+                                BackgroundColor="#DC3545"
                                 TextColor="White"
+                                FontAttributes="Bold"
                                 HorizontalOptions="FillAndExpand" />
 
                     </HorizontalStackLayout>
@@ -132,141 +154,151 @@
                 </VerticalStackLayout>
 
             </Frame>
+
             <!-- TABLA -->
 
-            <CollectionView ItemsSource="{Binding ListaPrestamos}">
+            <Frame BackgroundColor="White"
+                   CornerRadius="15"
+                   Padding="10"
+                   HasShadow="True">
 
-                <CollectionView.Header>
+                <CollectionView ItemsSource="{Binding ListaPrestamos}">
 
-                    <Grid BackgroundColor="#D9D9D9"
-                          Padding="8">
+                    <!-- HEADER -->
 
-                        <Grid.ColumnDefinitions>
+                    <CollectionView.Header>
 
-                            <ColumnDefinition Width="250" />
-                            <ColumnDefinition Width="250" />
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="250" />
-                            <ColumnDefinition Width="250" />
+                        <Grid BackgroundColor="#CACACA"
+                              Padding="10"
+                              ColumnDefinitions="250,220,170,170,150,220,180">
 
-                        </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0"
+                                   Text="Alumno / Docente"
+                                   TextColor="Black"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center" />
 
-                        <Label Grid.Column="0"
-                               Text="Alumno/Docente"
-                               FontAttributes="Bold"
-                               HorizontalTextAlignment="Center" />
+                            <Label Grid.Column="1"
+                                   Text="Material"
+                                   TextColor="Black"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center" />
 
-                        <Label Grid.Column="1"
-                               Text="Material"
-                               FontAttributes="Bold"
-                               HorizontalTextAlignment="Center" />
+                            <Label Grid.Column="2"
+                                   Text="Entrega"
+                                   TextColor="Black"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center" />
 
-                        <Label Grid.Column="2"
-                               Text="Fecha préstamo"
-                               FontAttributes="Bold"
-                               HorizontalTextAlignment="Center" />
+                            <Label Grid.Column="3"
+                                   Text="Devolución"
+                                   TextColor="Black"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center" />
 
-                        <Label Grid.Column="3"
-                               Text="Fecha devolución"
-                               FontAttributes="Bold"
-                               HorizontalTextAlignment="Center" />
+                            <Label Grid.Column="4"
+                                   Text="Estado"
+                                   TextColor="Black"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center" />
 
-                        <Label Grid.Column="4"
-                               Text="Estado"
-                               FontAttributes="Bold"
-                               HorizontalTextAlignment="Center" />
+                            <Label Grid.Column="5"
+                                   Text="Observaciones"
+                                   TextColor="Black"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center" />
 
-                        <Label Grid.Column="5"
-                               Text="Observaciones"
-                               FontAttributes="Bold"
-                               HorizontalTextAlignment="Center" />
-                        
-                        <Label Grid.Column="6"
-                               Text="Acciones"
-                               FontAttributes="Bold"
-                               HorizontalTextAlignment="Center" />
+                            <Label Grid.Column="6"
+                                   Text="Acciones"
+                                   TextColor="Black"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center" />
 
-                    </Grid>
+                        </Grid>
 
-                </CollectionView.Header>
+                    </CollectionView.Header>
 
-                <CollectionView.ItemTemplate>
+                    <!-- ITEMS -->
 
-                    <DataTemplate>
+                    <CollectionView.ItemTemplate>
 
-                        <Frame BorderColor="Gray"
-                               Padding="5"
-                               Margin="0,0,0,2">
+                        <DataTemplate>
 
-                            <Grid>
+                            <Frame BorderColor="#E0E0E0"
+                                   CornerRadius="10"
+                                   Padding="8"
+                                   Margin="0,5">
 
-                                <Grid.ColumnDefinitions>
+                                <Grid ColumnDefinitions="250,220,170,170,150,220,180">
 
-                                    <ColumnDefinition Width="250" />
-                                    <ColumnDefinition Width="250" />
-                                    <ColumnDefinition Width="200" />
-                                    <ColumnDefinition Width="200" />
-                                    <ColumnDefinition Width="150" />
-                                    <ColumnDefinition Width="250" />
-                                    <ColumnDefinition Width="250" />
+                                    <Label Grid.Column="0"
+                                           Text="{Binding Usuario}"
+                                           VerticalOptions="Center"
+                                           HorizontalTextAlignment="Center" />
 
-                                </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="1"
+                                           Text="{Binding Material}"
+                                           VerticalOptions="Center"
+                                           HorizontalTextAlignment="Center" />
 
-                                <Label Grid.Column="0"
-                                       Text="{Binding Usuario}"
-                                       HorizontalOptions="Center" />
+                                    <Label Grid.Column="2"
+                                           Text="{Binding FechaEntrega, StringFormat='{0:dd/MM/yyyy}'}"
+                                           VerticalOptions="Center"
+                                           HorizontalTextAlignment="Center" />
 
-                                <Label Grid.Column="1"
-                                       Text="{Binding Material}"
-                                       HorizontalOptions="Center" />
+                                    <Label Grid.Column="3"
+                                           Text="{Binding FechaDevolucion, StringFormat='{0:dd/MM/yyyy}'}"
+                                           VerticalOptions="Center"
+                                           HorizontalTextAlignment="Center" />
 
-                                <Label Grid.Column="2"
-                                       Text="{Binding FechaEntrega}"
-                                       HorizontalOptions="Center" />
+                                    <Label Grid.Column="4"
+                                           Text="{Binding Estado}"
+                                           VerticalOptions="Center"
+                                           HorizontalTextAlignment="Center" />
 
-                                <Label Grid.Column="3"
-                                       Text="{Binding FechaDevolucion}"
-                                       HorizontalOptions="Center" />
+                                    <Label Grid.Column="5"
+                                           Text="{Binding Observaciones}"
+                                           VerticalOptions="Center"
+                                           HorizontalTextAlignment="Center" />
 
-                                <Label Grid.Column="4"
-                                       Text="{Binding Estado}"
-                                       HorizontalOptions="Center" />
+                                    <HorizontalStackLayout Grid.Column="6"
+                                                           HorizontalOptions="Center"
+                                                           Spacing="10">
 
-                                <Label Grid.Column="5"
-                                       Text="{Binding Observaciones}"
-                                       HorizontalOptions="Center" />
+                                        <ImageButton Source="archivo.png"
+                                                     Clicked="Archivo_Clicked"
+                                                     WidthRequest="45"
+                                                     HeightRequest="45"
+                                                     BackgroundColor="#9F9F9F"
+                                                     
+                                                     CornerRadius="8" />
+                                        <ImageButton Source="editar.png"
+                                                     Clicked="Editar_Clicked"
+                                                     WidthRequest="45"
+                                                     HeightRequest="45"
+                                                     BackgroundColor="#FFC107"
+                                                     CornerRadius="8" />
 
-                                <HorizontalStackLayout Grid.Column="6"
-                                                       Spacing="10"
-                                                       HorizontalOptions="Center">
+                                        <ImageButton Source="eliminar.png"
+                                                     Clicked="Eliminar_Clicked"
+                                                     WidthRequest="45"
+                                                     HeightRequest="45"
+                                                     BackgroundColor="#DC3545"
+                                                     CornerRadius="8" />
 
-                                    <Button Text="Edit"
-                                            Clicked="Editar_Clicked"
-                                            BackgroundColor="#FFC107"
-                                            TextColor="White"
-                                            FontAttributes="Bold"
-                                            WidthRequest="65" />
+                                    </HorizontalStackLayout>
 
-                                    <Button Text="Elim"
-                                            Clicked="Eliminar_Clicked"
-                                            BackgroundColor="Red"
-                                            TextColor="White"
-                                            FontAttributes="Bold"
-                                            WidthRequest="65" />
+                                </Grid>
 
-                                </HorizontalStackLayout>
+                            </Frame>
 
-                            </Grid>
+                        </DataTemplate>
 
-                        </Frame>
+                    </CollectionView.ItemTemplate>
 
-                    </DataTemplate>
+                </CollectionView>
 
-                </CollectionView.ItemTemplate>
-
-            </CollectionView>
+            </Frame>
 
         </VerticalStackLayout>
 

@@ -37,7 +37,7 @@ public partial class LoginAdmin : ContentPage
                     usuario.Nombre;
                 Params.IdUsuarioConectado = usuario.IdUsuario;
                 Params.RolUsuarioConectado = usuario.Rol;
-                Params.IdLaboratorioConectado = usuario.IdLaboratorio;
+                Params.IdLaboratorioConectado = (int)usuario.IdLaboratorio;
 
                 await DisplayAlert(
                     "Correcto",
@@ -49,11 +49,8 @@ public partial class LoginAdmin : ContentPage
                     new NavigationPage(
                         new MenuAdmin());
             }
-
-
             else
             {
-
                 await DisplayAlert(
                     "Error",
                     "Correo o contraseña incorrectos",

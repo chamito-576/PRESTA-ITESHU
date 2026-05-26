@@ -28,10 +28,18 @@
                         CornerRadius="10"
                         HeightRequest="50" />
             </Grid>
+            <Label Text="Inventario"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="Green"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="10" />
                     <ColumnDefinition Width="200" />
                 </Grid.ColumnDefinitions>
 
@@ -43,18 +51,15 @@
                         FontAttributes="Bold"
                         CornerRadius="10"
                         HeightRequest="50" />
-
-                <Label Grid.Column="1"
-                       Text="Inventario"
-                       FontSize="28"
-                       FontAttributes="Bold"
-                       TextColor="Green"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center" />
-
                 <SearchBar Grid.Column="2"
                            Placeholder="Buscar..."
                            TextChanged="SearchBar_TextChanged" />
+                <Button Grid.Column="4"
+                        Text="Expediente"
+                        Clicked="Expediente_Clicked"
+                        BackgroundColor="#C6C1C1"
+                        TextColor="Black"
+                        FontAttributes="Bold" />
             </Grid>
 
             <Frame BorderColor="LightGray"
@@ -122,7 +127,7 @@
 
                 <CollectionView.Header>
 
-                    <Grid BackgroundColor="#D9D9D9"
+                    <Grid BackgroundColor="Red"
                           Padding="8">
 
                         <Grid.ColumnDefinitions>

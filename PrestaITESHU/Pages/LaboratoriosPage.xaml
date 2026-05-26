@@ -133,7 +133,7 @@
                     <CollectionView ItemsSource="{Binding Laboratorio}">
 
                         <CollectionView.Header>
-                            <Grid BackgroundColor="#D9D9D9"
+                            <Grid BackgroundColor="red"
                                   Padding="8">
 
                                 <Grid.ColumnDefinitions>

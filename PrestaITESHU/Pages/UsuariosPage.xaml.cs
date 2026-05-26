@@ -54,9 +54,20 @@ public partial class UsuariosPage : ContentPage
         {
             var lista = await laboratoriosManager.ObtenerTodos();
             LaboratoriosLista.Clear();
+            // OPCION VACIA
+            LaboratoriosLista.Add(new Laboratorios
+            {
+                IdLaboratorio = 0,
+                Nombre = "Sin laboratorio"
+            });
+
             if (lista != null)
+            {
                 foreach (var item in lista)
+                {
                     LaboratoriosLista.Add(item);
+                }
+            }
 
             OnPropertyChanged(nameof(LaboratoriosLista));
         }
@@ -135,7 +146,7 @@ public partial class UsuariosPage : ContentPage
         Carrera = string.Empty;
         Semestre = string.Empty;
         RolSeleccionado = null;
-        LaboratorioSeleccionado = null;
+        LaboratorioSeleccionado = LaboratoriosLista.FirstOrDefault(x => x.IdLaboratorio == 0);
         Activo = true;
         usuarioSeleccionado = null;
 
@@ -181,7 +192,7 @@ public partial class UsuariosPage : ContentPage
                     Carrera = Carrera,
                     Semestre = Semestre,
                     Rol = RolSeleccionado,
-                    IdLaboratorio = LaboratorioSeleccionado.IdLaboratorio,
+                    IdLaboratorio = LaboratorioSeleccionado == null ||LaboratorioSeleccionado.IdLaboratorio == 0? null: LaboratorioSeleccionado.IdLaboratorio,
                     Activo = Activo,
                     FechaAlta = DateTime.Now,
                     UsuarioAlta = Params.UsuarioConectado,
@@ -208,7 +219,7 @@ public partial class UsuariosPage : ContentPage
                 usuario.Carrera = Carrera;
                 usuario.Semestre = Semestre;
                 usuario.Rol = RolSeleccionado;
-                usuario.IdLaboratorio = LaboratorioSeleccionado.IdLaboratorio;
+                usuario.IdLaboratorio = LaboratorioSeleccionado == null || LaboratorioSeleccionado.IdLaboratorio == 0 ? null : LaboratorioSeleccionado.IdLaboratorio;
                 usuario.Activo = Activo;
                 usuario.FechaMod = DateTime.Now;
                 usuario.UsuarioMod = Params.UsuarioConectado;
@@ -272,7 +283,7 @@ public partial class UsuariosPage : ContentPage
         Carrera = vm.Carrera;
         Semestre = vm.Semestre;
         RolSeleccionado = vm.Rol;
-        LaboratorioSeleccionado = LaboratoriosLista.FirstOrDefault(l => l.IdLaboratorio == vm.IdLaboratorio);
+        LaboratorioSeleccionado =LaboratoriosLista.FirstOrDefault(l => l.IdLaboratorio == vm.IdLaboratorio)??LaboratoriosLista.FirstOrDefault(l => l.IdLaboratorio == 0);
         Activo = vm.Activo;
 
         OnPropertyChanged(nameof(Nombre));

@@ -16,8 +16,7 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [Route("ObtenerSolicitudesAdmin/{idUsuario}")]
-        public ActionResult ObtenerSolicitudesAdmin(
-    int idUsuario)
+        public ActionResult ObtenerSolicitudesAdmin(int idUsuario)
         {
             try
             {

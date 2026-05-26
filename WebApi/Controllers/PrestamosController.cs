@@ -27,13 +27,61 @@ namespace WebApi.Controllers
                 var lista =
                     repo.BuscarPrestamoQR(
                         idPrestamo,
-                         idLaboratorio);
+                        idLaboratorio);
 
                 return Ok(lista);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ObtenerHistorialUsuario/{idUsuario}")]
+        public ActionResult ObtenerHistorialUsuario(int idUsuario)
+        {
+            try
+            {
+                var repo =
+                    (DBSqlServer<Prestamos>)
+                    Parametros.FabricaRepository
+                    .PrestamosRepository();
+
+                var lista =
+                    repo.ObtenerHistorialUsuario(
+                        idUsuario);
+
+                return Ok(lista);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ObtenerReportePrestamo/{idPrestamo}")]
+        public ActionResult ObtenerReportePrestamo(int idPrestamo)
+        {
+            try
+            {
+                var repo =
+                    (DBSqlServer<Prestamos>)
+                    Parametros
+                    .FabricaRepository
+                    .PrestamosRepository();
+
+                var reporte =
+                    repo.ObtenerReportePrestamo(
+                        idPrestamo);
+
+                return Ok(reporte);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(
+                    ex.Message);
             }
         }
     }

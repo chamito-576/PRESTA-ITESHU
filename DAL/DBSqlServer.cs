@@ -269,6 +269,13 @@ namespace DAL
                             IdSolicitud =
                                 Convert.ToInt32(
                                     reader["IdSolicitud"]),
+                            IdUsuario =
+                                Convert.ToInt32(
+                                    reader["IdUsuario"]),
+
+                            IdMaterial =
+                                Convert.ToInt32(
+                                    reader["IdMaterial"]),
 
                             NombreUsuario =
                                 reader["NombreUsuario"]
@@ -299,7 +306,73 @@ namespace DAL
             }
         }
 
-        public List<PrestamosQRViewModel> BuscarPrestamoQR(int idPrestamo,int idLaboratorio)
+        public List<HistorialPrestamoViewModel>ObtenerHistorialUsuario(int idUsuario)
+        {
+            try
+            {
+                using (SqlConnection conexion =
+                    new SqlConnection(cadenaDeConexion))
+                {
+                    conexion.Open();
+
+                    SqlCommand cmd =
+                        new SqlCommand(
+                            "Obtener_Historial_Usuario",
+                            conexion);
+
+                    cmd.CommandType =
+                        CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue(
+                        "@IdUsuario",
+                        idUsuario);
+
+                    SqlDataReader reader =
+                        cmd.ExecuteReader();
+
+                    List<HistorialPrestamoViewModel>
+                        lista = new();
+
+                    while (reader.Read())
+                    {
+                        lista.Add(
+                            new HistorialPrestamoViewModel
+                            {
+                                IdPrestamo =
+                                    Convert.ToInt32(
+                                        reader["IdPrestamo"]),
+
+                                Material =
+                                    reader["Material"]
+                                    .ToString(),
+
+                                FechaEntrega =
+                                    Convert.ToDateTime(
+                                        reader["FechaEntrega"]),
+
+                                Laboratorio =
+                                    reader["Laboratorio"]
+                                    .ToString(),
+
+                                Estado =
+                                    reader["Estado"]
+                                    .ToString()
+                            });
+                    }
+
+                    return lista;
+                }
+            }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+
+                return null;
+            }
+        }
+
+
+        public List<PrestamosQRViewModel> BuscarPrestamoQR(int idPrestamo, int idLaboratorio)
         {
             try
             {
@@ -317,8 +390,7 @@ namespace DAL
                         CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue(
-                        "@IdPrestamo",
-                            idPrestamo);
+                        "@IdPrestamo",idPrestamo);
 
                     cmd.Parameters.AddWithValue(
                         "@IdLaboratorio",
@@ -374,6 +446,156 @@ namespace DAL
 
                 return null;
             }
+        }
+
+        public ExpedienteInventarioModel ObtenerExpedienteInventario(int idLaboratorio)
+        {
+            try
+            {
+                using SqlConnection conexion =new SqlConnection(cadenaDeConexion);
+
+                conexion.Open();
+
+                SqlCommand cmd =new SqlCommand("Obtener_Expediente_Inventario",conexion);
+
+                cmd.CommandType =CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@IdLaboratorio",idLaboratorio);
+
+                SqlDataReader reader =cmd.ExecuteReader();
+
+                ExpedienteInventarioModel expediente =null;
+
+                // PRIMER RESULTSET
+                // RESUMEN
+
+                if (reader.Read())
+                {
+                    expediente =
+                        new ExpedienteInventarioModel
+                        {
+                            Laboratorio =reader["Laboratorio"].ToString(),
+
+                            FechaGeneracion =Convert.ToDateTime(reader["FechaGeneracion"]),
+
+                            TotalInventario =Convert.ToInt32(reader["TotalInventario"]),
+
+                            Disponibles =Convert.ToInt32(reader["Disponibles"]),
+
+                            Prestados =Convert.ToInt32(reader["Prestados"]),
+
+                            Devueltos =Convert.ToInt32(reader["Devueltos"]),
+
+                            Retrasados =Convert.ToInt32(reader["Retrasados"]),
+
+                            TotalMovimientos =Convert.ToInt32(reader["TotalMovimientos"]),
+
+                            Movimientos =new List< DetalleMovimientoModel>()
+                        };
+                }
+
+                // TABLA MOVIMIENTOS
+
+                if (reader.NextResult())
+                {
+                    while (reader.Read())
+                    {
+                        expediente?.Movimientos.Add(new DetalleMovimientoModel
+                            {
+                                Material =reader["Material"].ToString(),
+                                Descripcion = reader["Descripcion"].ToString(),
+
+                                Usuario =reader["Usuario"].ToString(),
+
+                                FechaEntrega =reader["FechaEntrega"]== DBNull.Value? null: Convert.ToDateTime(reader["FechaEntrega"]),
+
+                                FechaDevolucion =reader["FechaDevolucion"]== DBNull.Value? null: Convert.ToDateTime(reader["FechaDevolucion"]),
+
+                                Estado =reader["Estado"].ToString()
+                            });
+                    }
+                }
+
+                return expediente;
+            }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+                return null;
+            }
+        }
+        public ReportePrestamoViewModel ObtenerReportePrestamo(int idPrestamo)
+        {
+            using SqlConnection conexion =
+                new SqlConnection(
+                    cadenaDeConexion);
+
+            conexion.Open();
+
+            SqlCommand cmd =
+                new SqlCommand(
+                    "Buscar_Reporte_Prestamo",
+                    conexion);
+
+            cmd.CommandType =
+                CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue(
+                "@IdPrestamo",
+                idPrestamo);
+
+            SqlDataReader reader =
+                cmd.ExecuteReader();
+
+            if (reader.Read())
+            {
+                return new ReportePrestamoViewModel
+                {
+                    NombreUsuario =
+                        reader["NombreUsuario"]
+                        .ToString(),
+
+                    Carrera =
+                        reader["Carrera"]
+                        .ToString(),
+
+                    Laboratorio =
+                        reader["Laboratorio"]
+                        .ToString(),
+
+                    Material =
+                        reader["Material"]
+                        .ToString(),
+
+                    IdMaterial =
+                        Convert.ToInt32(
+                            reader["IdMaterial"]),
+
+                    Cantidad =
+                        Convert.ToInt32(
+                            reader["Cantidad"]),
+
+                    Observaciones =
+                        reader["Observaciones"]
+                        .ToString(),
+
+                    FechaEntrega =
+                        reader["FechaEntrega"]
+                        == DBNull.Value
+                        ? null
+                        : Convert.ToDateTime(
+                            reader["FechaEntrega"]),
+
+                    FechaDevolucion =
+                        reader["FechaDevolucion"]
+                        == DBNull.Value
+                        ? null
+                        : Convert.ToDateTime(
+                            reader["FechaDevolucion"])
+                };
+            }
+
+            return null;
         }
 
         public List<ReporteExcelViewModel> ObtenerReporteExcel()

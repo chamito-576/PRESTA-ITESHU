@@ -18,7 +18,7 @@ namespace COMMON.Entidades
         public string? Carrera { get; set; }
         public string? Semestre { get; set; }
         public string Rol { get; set; }
-        public int IdLaboratorio { get; set; }
+        public int? IdLaboratorio { get; set; }
         public bool Activo { get; set; }
     }
 }
